@@ -56,6 +56,7 @@ public class ChessBoard {
      * @return
      */
     public boolean hasPiece(ChessPosition position) {
+        if(position.getRow()-1 < 0 || position.getColumn()-1 < 0 || position.getRow()-1 > 7 || position.getColumn()-1 > 7) return false;
         return this.board[position.getRow()-1][position.getColumn()-1] != null;
     }
 

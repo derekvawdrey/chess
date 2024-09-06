@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.Objects;
+
 /**
  * A chessboard that can hold and rearrange chess pieces.
  * <p>
@@ -55,8 +57,8 @@ public class ChessBoard {
      * @param teamColor the color of the team
      */
     private void placeStartingPieces(ChessGame.TeamColor teamColor){
-        int row = teamColor == ChessGame.TeamColor.BLACK ? 0 : 7;
-        int pawnRow = teamColor == ChessGame.TeamColor.BLACK ? 1 : 6;
+        int row = teamColor == ChessGame.TeamColor.WHITE ? 0 : 7;
+        int pawnRow = teamColor == ChessGame.TeamColor.WHITE ? 1 : 6;
         this.board[row][0] = new ChessPiece(teamColor, ChessPiece.PieceType.ROOK);
         this.board[row][1] = new ChessPiece(teamColor, ChessPiece.PieceType.KNIGHT);
         this.board[row][2] = new ChessPiece(teamColor, ChessPiece.PieceType.BISHOP);
@@ -85,7 +87,8 @@ public class ChessBoard {
                 ChessPosition position = new ChessPosition(i, j);
                 ChessPiece thisPiece = this.getPiece(position);
                 ChessPiece comparingPiece = comparingBoard.getPiece(position);
-                if(!thisPiece.equals(comparingPiece)) return false;
+
+                if (!Objects.equals(thisPiece, comparingPiece)) return false;
             }
         }
         return true;

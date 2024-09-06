@@ -45,7 +45,7 @@ public class RookMovesCalculator implements PieceMovesCalculator {
     private Collection<ChessMove> calculateSingleDirection(ChessBoard board, ChessPosition position, ChessPiece piece, Direction direction) {
         List<ChessMove> moves = new ArrayList<>();
         int incrementer = (direction == Direction.UP || direction == Direction.RIGHT) ? 1 : -1;
-        int anchorPoint = (direction == Direction.UP || direction == Direction.DOWN) ? position.getColumn() + incrementer : position.getRow() + incrementer;
+        int anchorPoint = (direction == Direction.UP || direction == Direction.DOWN) ? position.getRow() + incrementer: position.getColumn() + incrementer;
         int endPoint = (direction == Direction.UP || direction == Direction.RIGHT) ? 9 : 0;
 
         for(int i = anchorPoint; i < endPoint; i+=incrementer) {

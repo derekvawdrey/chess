@@ -32,5 +32,18 @@ public class ChessPosition {
         return this.col;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
+    /**
+    * @return boolean if same position (row,col)
+    *
+    * */
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof ChessPosition comparingPosition)) return false;
+        return (comparingPosition.row == this.row) && (comparingPosition.col == this.col);
+    }
 }

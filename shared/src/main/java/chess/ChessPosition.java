@@ -41,6 +41,13 @@ public class ChessPosition {
         return result;
     }
 
+    @Override
+    public String toString() {
+        char columnLetter = (char) ('a' + col);
+        int rowNumber = row + 1;
+        return "" + columnLetter + rowNumber;
+    }
+
     /**
     * @return boolean if same position (row,col)
     *

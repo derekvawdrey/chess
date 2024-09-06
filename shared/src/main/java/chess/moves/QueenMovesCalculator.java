@@ -6,6 +6,7 @@ import chess.ChessPiece;
 import chess.ChessPosition;
 import chess.moves.interfaces.PieceMovesCalculator;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,7 +19,11 @@ public class QueenMovesCalculator implements PieceMovesCalculator {
      */
     @Override
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece) {
-        return List.of();
+        // This is ltierally a combination of Rook and Bishop moves, we can just combine them here.
+        Collection<ChessMove> moves = new ArrayList<>();
+        moves.addAll(new BishopMovesCalculator().pieceMoves(board, position, piece));
+        moves.addAll(new RookMovesCalculator().pieceMoves(board, position, piece));
+        return moves;
     }
-    // This is ltierally a combination of Rook and Bishop moves, we can just combine them here.
+
 }

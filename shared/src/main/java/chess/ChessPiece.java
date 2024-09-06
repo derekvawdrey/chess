@@ -1,5 +1,8 @@
 package chess;
 
+import chess.moves.DefaultPieceMovesCalculator;
+import chess.moves.interfaces.PieceMovesCalculatorFactory;
+
 import java.util.Collection;
 
 /**
@@ -12,10 +15,12 @@ public class ChessPiece {
 
     private final ChessPiece.PieceType pieceType;
     private final ChessGame.TeamColor teamColor;
+    private final PieceMovesCalculatorFactory pieceMovesCalculatorFactory;
 
     public ChessPiece(ChessGame.TeamColor pieceColor, ChessPiece.PieceType type) {
         this.teamColor = pieceColor;
         this.pieceType = type;
+        this.pieceMovesCalculatorFactory = new DefaultPieceMovesCalculator();
     }
 
     /**
@@ -52,7 +57,7 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
-        throw new RuntimeException("Not implemented");
+        return pieceMovesCalculatorFactory.createCalculator(this).pieceMoves(board, myPosition, this);
     }
 
     @Override

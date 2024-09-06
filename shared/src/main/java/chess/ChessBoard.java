@@ -11,7 +11,7 @@ public class ChessBoard {
     private final ChessPiece[][] board;
 
     public ChessBoard() {
-        board = new ChessPiece[8][8];
+        this.board = new ChessPiece[8][8];
     }
 
     /**
@@ -92,8 +92,9 @@ public class ChessBoard {
     @Override
     public boolean equals(Object obj) {
         if(!(obj instanceof ChessBoard comparingBoard)) return false;
-        for(int i = 0; i < 8; i++) {
-            for(int j = 0; j < 8; j++) {
+        // Starts at 1 and goes to 8 because the tests are written in a way that don't necessarily work with Arrays
+        for(int i = 1; i < 9; i++) {
+            for(int j = 1; j < 9; j++) {
                 ChessPosition position = new ChessPosition(i, j);
                 ChessPiece thisPiece = this.getPiece(position);
                 ChessPiece comparingPiece = comparingBoard.getPiece(position);

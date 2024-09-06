@@ -44,7 +44,7 @@ public class ChessPosition {
     @Override
     public String toString() {
         char columnLetter = (char) ('a' + col);
-        int rowNumber = row + 1;
+        int rowNumber = row;
         return "" + columnLetter + rowNumber;
     }
 

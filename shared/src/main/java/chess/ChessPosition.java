@@ -38,7 +38,6 @@ public class ChessPosition {
         int result = 5;
         result = 31 * result + this.row;
         result = 31 * result + this.col;
-        // I dont think we need to handle null values here.
         return result;
     }
 

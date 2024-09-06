@@ -75,6 +75,8 @@ public class ChessBoard {
     
     @Override
     public int hashCode() {
+
+
         // TODO: IMPLEMENT
         return super.hashCode();
     }

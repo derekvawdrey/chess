@@ -41,9 +41,8 @@ public class ChessBoard {
      * (How the game of chess normally starts)
      */
     public void resetBoard() {
-
-        for(int i = 0; i < 8; i++) {
-            for(int j = 0; j < 8; j++) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
                 this.board[i][j] = null;
             }
         }
@@ -83,5 +82,24 @@ public class ChessBoard {
         for(int col = 0; col < 8; col++) {
             this.board[1][col] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN);
         }
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof ChessBoard comparingBoard)) return false;
+        for(int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++) {
+                ChessPosition position = new ChessPosition(i, j);
+                ChessPiece thisPiece = this.getPiece(position);
+                ChessPiece comparingPiece = comparingBoard.getPiece(position);
+                if(!thisPiece.equals(comparingPiece)) return false;
+            }
+        }
+        return true;
     }
 }

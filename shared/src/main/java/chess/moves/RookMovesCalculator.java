@@ -60,7 +60,7 @@ public class RookMovesCalculator implements PieceMovesCalculator {
                 moves.add(new ChessMove(position, end_position,null));
             }else{
                 // If the piece is of the opposite color, we can take it
-                if(!board.isPieceSameColor(piece, board.getPiece(end_position))){
+                if(!board.isPieceSameColor(position, end_position)){
                     moves.add(new ChessMove(position, end_position,null));
                 }
                 break;

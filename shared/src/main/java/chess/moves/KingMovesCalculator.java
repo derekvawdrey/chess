@@ -32,9 +32,8 @@ public class KingMovesCalculator implements PieceMovesCalculator {
         positions.add(new ChessPosition(position.getRow()-1, position.getColumn()+1));
 
         positions.forEach(new_position -> {
-
             if((new_position.getColumn() > 0 && new_position.getColumn() < 9) && (new_position.getRow() > 0 && new_position.getRow() < 9)) {
-                if(board.hasPiece(new_position) && !board.isPieceSameColor(board.getPiece(new_position),board.getPiece(position))){
+                if(board.hasPiece(new_position) && !board.isPieceSameColor(new_position,position)){
                     moves.add(new ChessMove(position,new_position,null));
                 } else if(!board.hasPiece(new_position)){
                     moves.add(new ChessMove(position,new_position,null));

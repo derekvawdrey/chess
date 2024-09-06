@@ -20,4 +20,5 @@ public class QueenMovesCalculator implements PieceMovesCalculator {
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece) {
         return List.of();
     }
+    // This is ltierally a combination of Rook and Bishop moves, we can just combine them here.
 }

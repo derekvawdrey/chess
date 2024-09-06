@@ -37,7 +37,8 @@ public class PawnMovesCalculator implements PieceMovesCalculator {
 
 
         if(!board.hasPiece(jumpOneAhead.getEndPosition())){
-            moves.add(jumpOneAhead);
+            // If promoting, we don't need to add this moveset
+            if(!isNearPromotion(position, piece)) moves.add(jumpOneAhead);
             moves.addAll(movesIfPawnNearPromotion(position, oneAhead, piece));
         }
 
@@ -51,11 +52,13 @@ public class PawnMovesCalculator implements PieceMovesCalculator {
         ChessMove d = new ChessMove(position, diagonal1,null);
         ChessMove d2 = new ChessMove(position, diagonal2, null);
         if(board.hasPiece(d.getEndPosition())) {
-            moves.add(d);
+            // If promoting we dont have to add this move
+            if(!isNearPromotion(position, piece)) moves.add(d);
             moves.addAll(movesIfPawnNearPromotion(position,diagonal1, piece));
         }
         if(board.hasPiece(d2.getEndPosition())) {
-            moves.add(d2);
+            // If promoting we dont have to add this move
+            if(!isNearPromotion(position, piece)) moves.add(d2);
             moves.addAll(movesIfPawnNearPromotion(position,diagonal2, piece));
         }
 
@@ -77,6 +80,17 @@ public class PawnMovesCalculator implements PieceMovesCalculator {
     }
 
     /**
+     * Determines if the piece is currently near a promotion point
+     * @param position
+     * @param piece
+     * @return a boolean
+     */
+    private boolean isNearPromotion(ChessPosition position, ChessPiece piece) {
+        return (piece.getTeamColor() == ChessGame.TeamColor.WHITE && position.getRow() == 7)
+                || (piece.getTeamColor() == ChessGame.TeamColor.BLACK && position.getRow() == 2);
+    }
+
+    /**
      * Determines if the move is a promotion move, and then adds the moves
      * @param startPosition
      * @param endPosition
@@ -86,8 +100,7 @@ public class PawnMovesCalculator implements PieceMovesCalculator {
     private Collection<ChessMove> movesIfPawnNearPromotion(ChessPosition startPosition, ChessPosition endPosition, ChessPiece piece) {
         List<ChessMove> moves = new ArrayList<>();
         // If they are near promotion
-        if((piece.getTeamColor() == ChessGame.TeamColor.WHITE && startPosition.getRow() == 7)
-                || (piece.getTeamColor() == ChessGame.TeamColor.BLACK && startPosition.getRow() == 2)){
+        if(isNearPromotion(startPosition, piece)){
             ChessMove promoteQueen  = new ChessMove(startPosition, endPosition, ChessPiece.PieceType.QUEEN);
             ChessMove promoteKnight  = new ChessMove(startPosition, endPosition, ChessPiece.PieceType.KNIGHT);
             ChessMove promoteBishop  = new ChessMove(startPosition, endPosition, ChessPiece.PieceType.BISHOP);

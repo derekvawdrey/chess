@@ -46,44 +46,31 @@ public class ChessBoard {
                 this.board[i][j] = null;
             }
         }
-        this.placePiecesForBlack();
-        this.placePiecesForWhite();
+        this.placeStartingPieces(ChessGame.TeamColor.BLACK);
+        this.placeStartingPieces(ChessGame.TeamColor.WHITE);
     }
 
     /**
-     * Places the pieces in game start position for white
+     * Adds the starting pieces for the team specified
+     * @param teamColor the color of the team
      */
-    private void placePiecesForWhite(){
-        this.board[7][0] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK);
-        this.board[7][7] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.ROOK);
-        this.board[7][1] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT);
-        this.board[7][6] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KNIGHT);
-        this.board[7][2] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP);
-        this.board[7][5] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.BISHOP);
-        this.board[7][3] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.QUEEN);
-        this.board[7][4] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.KING);
+    private void placeStartingPieces(ChessGame.TeamColor teamColor){
+        int row = teamColor == ChessGame.TeamColor.BLACK ? 0 : 7;
+        int pawnRow = teamColor == ChessGame.TeamColor.BLACK ? 1 : 6;
+        this.board[row][0] = new ChessPiece(teamColor, ChessPiece.PieceType.ROOK);
+        this.board[row][1] = new ChessPiece(teamColor, ChessPiece.PieceType.KNIGHT);
+        this.board[row][2] = new ChessPiece(teamColor, ChessPiece.PieceType.BISHOP);
+        this.board[row][3] = new ChessPiece(teamColor, ChessPiece.PieceType.QUEEN);
+        this.board[row][4] = new ChessPiece(teamColor, ChessPiece.PieceType.KING);
+        this.board[row][5] = new ChessPiece(teamColor, ChessPiece.PieceType.BISHOP);
+        this.board[row][6] = new ChessPiece(teamColor, ChessPiece.PieceType.KNIGHT);
+        this.board[row][7] = new ChessPiece(teamColor, ChessPiece.PieceType.ROOK);
+
         for(int col = 0; col < 8; col++) {
-            this.board[6][col] = new ChessPiece(ChessGame.TeamColor.WHITE, ChessPiece.PieceType.PAWN);
+            this.board[pawnRow][col] = new ChessPiece(teamColor, ChessPiece.PieceType.PAWN);
         }
     }
-
-    /**
-     * Places the pieces in game start position for black
-     */
-    private void placePiecesForBlack(){
-        this.board[0][0] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
-        this.board[0][7] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.ROOK);
-        this.board[0][1] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT);
-        this.board[0][6] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KNIGHT);
-        this.board[0][2] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP);
-        this.board[0][5] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.BISHOP);
-        this.board[0][3] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.QUEEN);
-        this.board[0][4] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.KING);
-        for(int col = 0; col < 8; col++) {
-            this.board[1][col] = new ChessPiece(ChessGame.TeamColor.BLACK, ChessPiece.PieceType.PAWN);
-        }
-    }
-
+    
     @Override
     public int hashCode() {
         return super.hashCode();

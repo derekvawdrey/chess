@@ -14,7 +14,7 @@ public class QueenMovesCalculator implements PieceMovesCalculator {
      * @param board
      * @param position
      * @param piece
-     * @return
+     * @return A collection of valid chess moves (moves that would place the king in danger are not counted for)
      */
     @Override
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece) {

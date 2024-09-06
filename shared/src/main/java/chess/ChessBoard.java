@@ -39,6 +39,15 @@ public class ChessBoard {
     }
 
     /**
+     * Checks if there is a piece in a position, similar to getPiece.
+     * @param position
+     * @return
+     */
+    public boolean hasPiece(ChessPosition position) {
+        return this.board[position.getRow()-1][position.getColumn()-1] != null;
+    }
+
+    /**
      * Sets the board to the default starting board
      * (How the game of chess normally starts)
      */

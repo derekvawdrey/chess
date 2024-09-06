@@ -27,6 +27,12 @@ public class PawnMovesCalculator implements PieceMovesCalculator {
         }
     }
 
+    /**
+     * Determines if the pawn is in its starting position
+     * @param position
+     * @param piece
+     * @return true/false if the pawn is in its original position
+     */
     private boolean isInOriginalPosition(ChessPosition position, ChessPiece piece) {
         if(piece.getTeamColor() == ChessGame.TeamColor.WHITE){
             return position.getRow() == 2;
@@ -34,12 +40,26 @@ public class PawnMovesCalculator implements PieceMovesCalculator {
         return position.getRow() == 7;
     }
 
+    /**
+     * Calculates the moves a white pawn can do
+     * @param board
+     * @param position
+     * @param piece
+     * @return A collection of moves for a white pawn
+     */
     private Collection<ChessMove> getWhiteMoves(ChessBoard board, ChessPosition position, ChessPiece piece){
         List<ChessMove> moves = new ArrayList<>();
 
         return moves;
     }
 
+    /**
+     * Calculates the moves a black pawn can do
+     * @param board
+     * @param position
+     * @param piece
+     * @return A collection of moves for a black pawn
+     */
     private Collection<ChessMove> getBlackMoves(ChessBoard board, ChessPosition position, ChessPiece piece){
         List<ChessMove> moves = new ArrayList<>();
         return moves;

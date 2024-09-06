@@ -22,29 +22,50 @@ public class RookMovesCalculator implements PieceMovesCalculator {
         List<ChessMove> moves = new ArrayList<>();
 
         // Left to Right, top to bottom. Do each 4 and then when they detect a piece, those are the moves it can do up to that point
+        moves.addAll(calculateSingleDirection(board, position, piece, Direction.UP));
+        moves.addAll(calculateSingleDirection(board, position, piece, Direction.DOWN));
+        moves.addAll(calculateSingleDirection(board, position, piece, Direction.LEFT));
+        moves.addAll(calculateSingleDirection(board, position, piece, Direction.RIGHT));
 
-        for(int colLeft = position.getColumn() - 1; colLeft < 0; colLeft++) {
-            ChessPosition end_position = new ChessPosition(colLeft, position.getRow()));
+        return moves;
+    }
+
+    private enum Direction {
+        UP, DOWN, LEFT, RIGHT
+    }
+
+    /**
+     * Calculates the moves for this piece in a single direction
+     * @param board
+     * @param position
+     * @param piece
+     * @param direction
+     * @return a set of moves
+     */
+    private Collection<ChessMove> calculateSingleDirection(ChessBoard board, ChessPosition position, ChessPiece piece, Direction direction) {
+        List<ChessMove> moves = new ArrayList<>();
+        int incrementer = (direction == Direction.UP || direction == Direction.RIGHT) ? 1 : -1;
+        int anchorPoint = (direction == Direction.UP || direction == Direction.DOWN) ? position.getColumn() + incrementer : position.getRow() + incrementer;
+        int endPoint = (direction == Direction.UP || direction == Direction.RIGHT) ? 9 : 0;
+
+        for(int i = anchorPoint; i < endPoint; i+=incrementer) {
+            ChessPosition end_position;
+            if(direction == Direction.UP || direction == Direction.DOWN) {
+                end_position = new ChessPosition(anchorPoint, position.getColumn());
+            }else{
+                end_position = new ChessPosition(position.getRow(), anchorPoint);
+            }
+
             if(!board.hasPiece(end_position)) {
                 moves.add(new ChessMove(position, end_position,null));
             }else{
-
+                // If the piece is of the opposite color, we can take it
+                if(!board.isPieceSameColor(piece, board.getPiece(end_position))){
+                    moves.add(new ChessMove(position, end_position,null));
+                }
                 break;
             }
         }
-
-        for(int colRight = position.getColumn() + 1; colRight < 9; colRight++) {
-
-        }
-
-        for(int rowTop = position.getRow() + 1; rowTop < 9; rowTop++) {
-
-        }
-
-        for(int rowBottom = position.getRow() - 1; rowBottom < 0; rowBottom++) {
-
-        }
-
         return moves;
     }
 }

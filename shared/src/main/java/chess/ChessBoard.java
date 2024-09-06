@@ -39,6 +39,16 @@ public class ChessBoard {
     }
 
     /**
+     * A helper function to determine if a piece and can take another piece
+     * @param piece1
+     * @param piece2
+     * @return a boolean
+     */
+    public boolean isPieceSameColor(ChessPiece piece1, ChessPiece piece2) {
+        return piece1.getTeamColor() == piece2.getTeamColor();
+    }
+
+    /**
      * Checks if there is a piece in a position, similar to getPiece.
      * @param position
      * @return

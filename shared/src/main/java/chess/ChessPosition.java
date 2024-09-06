@@ -34,7 +34,11 @@ public class ChessPosition {
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        // Stack overflow mentions that you want to start with a prime number, and then follow this pattern for int values
+        int result = 5;
+        result = 31 * result + this.row;
+        result = 31 * result + this.col;
+        return result;
     }
 
     /**

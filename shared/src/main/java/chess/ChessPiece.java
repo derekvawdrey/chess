@@ -1,6 +1,7 @@
 package chess;
 
 import chess.moves.DefaultPieceMovesCalculator;
+import chess.moves.interfaces.PieceMovesCalculator;
 import chess.moves.interfaces.PieceMovesCalculatorFactory;
 
 import java.util.Collection;
@@ -58,6 +59,19 @@ public class ChessPiece {
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
         return pieceMovesCalculatorFactory.createCalculator(this).pieceMoves(board, myPosition, this);
+    }
+
+    /**
+     * Determines the
+     * @param board
+     * @param myPosition
+     * @param ignoreColor tells the calculator to ignore colors when determining wha
+     * @return
+     */
+    public Collection<ChessMove> pieceCoverage(ChessBoard board, ChessPosition myPosition, boolean ignoreColor) {
+        PieceMovesCalculator calculator = pieceMovesCalculatorFactory.createCalculator(this);
+        calculator.setIgnoreColor(ignoreColor);
+        return calculator.pieceMoves(board, myPosition, this);
     }
 
     @Override

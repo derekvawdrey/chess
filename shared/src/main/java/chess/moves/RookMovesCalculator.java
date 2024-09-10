@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class RookMovesCalculator implements PieceMovesCalculator {
+public class RookMovesCalculator extends PieceMovesCalculator {
     /**
      * @param board
      * @param position
@@ -61,6 +61,8 @@ public class RookMovesCalculator implements PieceMovesCalculator {
             }else{
                 // If the piece is of the opposite color, we can take it
                 if(!board.isPieceSameColor(position, end_position)){
+                    moves.add(new ChessMove(position, end_position,null));
+                }else if(this.fullCoverage){
                     moves.add(new ChessMove(position, end_position,null));
                 }
                 break;

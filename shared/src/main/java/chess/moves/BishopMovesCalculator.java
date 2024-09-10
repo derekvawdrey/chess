@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class BishopMovesCalculator implements PieceMovesCalculator {
+public class BishopMovesCalculator extends PieceMovesCalculator {
     /**
      * @param board
      * @param position
@@ -54,6 +54,9 @@ public class BishopMovesCalculator implements PieceMovesCalculator {
                 moves.add(new ChessMove(position, newPosition, null));
                 break;
             } else if(board.hasPiece(newPosition)){
+                if(this.fullCoverage){
+                    moves.add(new ChessMove(position, newPosition, null));
+                }
                 break;
             }
             moves.add(new ChessMove(position, newPosition, null));

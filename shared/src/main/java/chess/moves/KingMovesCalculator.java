@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class KingMovesCalculator implements PieceMovesCalculator {
+public class KingMovesCalculator extends PieceMovesCalculator {
     /**
      * @param board
      * @param position
@@ -35,7 +35,9 @@ public class KingMovesCalculator implements PieceMovesCalculator {
             if((new_position.getColumn() > 0 && new_position.getColumn() < 9) && (new_position.getRow() > 0 && new_position.getRow() < 9)) {
                 if(board.hasPiece(new_position) && !board.isPieceSameColor(new_position,position)){
                     moves.add(new ChessMove(position,new_position,null));
-                } else if(!board.hasPiece(new_position)){
+                } else if(fullCoverage && board.hasPiece(new_position)){
+                    moves.add(new ChessMove(position,new_position,null));
+                }else if(!board.hasPiece(new_position)){
                     moves.add(new ChessMove(position,new_position,null));
                 }
             }

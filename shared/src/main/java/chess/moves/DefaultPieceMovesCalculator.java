@@ -11,21 +11,14 @@ public class DefaultPieceMovesCalculator implements PieceMovesCalculatorFactory 
      */
     @Override
     public PieceMovesCalculator createCalculator(ChessPiece piece) {
-        switch (piece.getPieceType()) {
-            case ChessPiece.PieceType.ROOK:
-                return new RookMovesCalculator();
-            case ChessPiece.PieceType.KNIGHT:
-                return new KnightMovesCalculator();
-            case ChessPiece.PieceType.BISHOP:
-                return new BishopMovesCalculator();
-            case ChessPiece.PieceType.QUEEN:
-                return new QueenMovesCalculator();
-            case ChessPiece.PieceType.KING:
-                return new KingMovesCalculator();
-            case ChessPiece.PieceType.PAWN:
-                return new PawnMovesCalculator();
-            default:
-                throw new IllegalArgumentException("Unknown piece type: " + piece.getPieceType());
-        }
+        return switch (piece.getPieceType()) {
+            case ChessPiece.PieceType.ROOK -> new RookMovesCalculator();
+            case ChessPiece.PieceType.KNIGHT -> new KnightMovesCalculator();
+            case ChessPiece.PieceType.BISHOP -> new BishopMovesCalculator();
+            case ChessPiece.PieceType.QUEEN -> new QueenMovesCalculator();
+            case ChessPiece.PieceType.KING -> new KingMovesCalculator();
+            case ChessPiece.PieceType.PAWN -> new PawnMovesCalculator();
+            default -> throw new IllegalArgumentException("Unknown piece type: " + piece.getPieceType());
+        };
     }
 }

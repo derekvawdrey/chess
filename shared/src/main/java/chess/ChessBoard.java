@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 /**
@@ -93,6 +95,27 @@ public class ChessBoard {
         for(int col = 0; col < 8; col++) {
             this.board[pawnRow][col] = new ChessPiece(teamColor, ChessPiece.PieceType.PAWN);
         }
+    }
+
+    /**
+     * Grabs all pieces on the board
+     * @return a collection of ChessPiece
+     */
+    public Collection<ChessPiece> grabAllPieces(){
+        Collection<ChessPiece> pieces = new ArrayList<>();
+
+        return pieces;
+    }
+
+    /**
+     * Grabs all possible moves each piece can do that belongs to a team color
+     * @param teamColor
+     * @return A collection of moves
+     */
+    public Collection<ChessMove> grabTeamColorCoverage(ChessGame.TeamColor teamColor) {
+        Collection<ChessMove> moves = new ArrayList<>();
+
+        return moves;
     }
     
     @Override

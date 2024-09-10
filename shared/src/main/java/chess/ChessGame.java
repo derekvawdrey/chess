@@ -1,5 +1,6 @@
 package chess;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 /**
@@ -50,7 +51,13 @@ public class ChessGame {
      * startPosition
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
-        throw new RuntimeException("Not implemented");
+        ChessPiece piece = this.chessBoard.getPiece(startPosition);
+        if(piece == null) return null;
+
+        Collection<ChessMove> moves = new ArrayList<>(piece.pieceMoves(chessBoard, startPosition));
+        // For king, determine if piece would be in danger, and then remove those positions from the moves
+
+        return moves;
     }
 
     /**

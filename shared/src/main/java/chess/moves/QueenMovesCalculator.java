@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class QueenMovesCalculator implements PieceMovesCalculator {
+public class QueenMovesCalculator extends PieceMovesCalculator {
     /**
      * @param board
      * @param position

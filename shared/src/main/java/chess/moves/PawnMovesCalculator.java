@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class PawnMovesCalculator implements PieceMovesCalculator {
+public class PawnMovesCalculator extends PieceMovesCalculator {
     /**
      * @param board
      * @param position
@@ -54,13 +54,18 @@ public class PawnMovesCalculator implements PieceMovesCalculator {
         ChessMove d2 = new ChessMove(position, diagonal2, null);
         if(board.hasPiece(diagonal1) && board.getPiece(diagonal1).getTeamColor() == oppositeTeamColor) {
             // If promoting we dont have to add this move
-            if(!isNearPromotion(position, piece)) moves.add(d);
-            moves.addAll(movesIfPawnNearPromotion(position,diagonal1, piece));
+            if (!isNearPromotion(position, piece)) moves.add(d);
+            moves.addAll(movesIfPawnNearPromotion(position, diagonal1, piece));
+        }else if(fullCoverage && board.hasPiece(diagonal1)){
+            moves.addAll(movesIfPawnNearPromotion(position, diagonal1, null));
         }
+
         if(board.hasPiece(diagonal2) && board.getPiece(diagonal2).getTeamColor() == oppositeTeamColor) {
             // If promoting we dont have to add this move
             if(!isNearPromotion(position, piece)) moves.add(d2);
-            moves.addAll(movesIfPawnNearPromotion(position,diagonal2, piece));
+            moves.addAll(movesIfPawnNearPromotion(position, diagonal2, piece));
+        }else if(fullCoverage && board.hasPiece(diagonal2)){
+            moves.addAll(movesIfPawnNearPromotion(position, diagonal2, null));
         }
 
 

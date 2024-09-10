@@ -51,11 +51,18 @@ public class ChessGame {
      * startPosition
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
-        ChessPiece piece = this.chessBoard.getPiece(startPosition);
-        if(piece == null) return null;
+        ChessPiece movingPiece = this.chessBoard.getPiece(startPosition);
+        if(movingPiece == null) return null;
 
-        Collection<ChessMove> moves = new ArrayList<>(piece.pieceMoves(chessBoard, startPosition));
-        // For king, determine if piece would be in danger, and then remove those positions from the moves
+        Collection<ChessMove> moves = new ArrayList<>(movingPiece.pieceMoves(chessBoard, startPosition));
+        TeamColor oppositeTeamColor = movingPiece.getTeamColor() == TeamColor.BLACK ? TeamColor.WHITE : TeamColor.BLACK;
+        if(movingPiece.getPieceType() == ChessPiece.PieceType.KING){
+            // For king, determine if piece would be in danger, and then remove those positions from the moves
+            Collection<ChessPosition> enemyCoverage = this.chessBoard.grabTeamColorCoverage(oppositeTeamColor);
+            
+        }
+
+
 
         return moves;
     }

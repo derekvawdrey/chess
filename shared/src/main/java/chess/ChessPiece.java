@@ -62,11 +62,11 @@ public class ChessPiece {
     }
 
     /**
-     * Determines the areas the piece covers
+     * Determines the squares the piece covers
      *
      * @param board
      * @param myPosition
-     * @return
+     * @return grabs all the positions the piece covers
      */
     public Collection<ChessPosition> pieceCoverage(ChessBoard board, ChessPosition myPosition) {
         PieceMovesCalculator calculator = pieceMovesCalculatorFactory.createCalculator(this);

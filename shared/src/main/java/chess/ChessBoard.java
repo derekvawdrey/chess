@@ -112,10 +112,10 @@ public class ChessBoard {
      * @param teamColor
      * @return A collection of moves
      */
-    public Collection<ChessMove> grabTeamColorCoverage(ChessGame.TeamColor teamColor) {
-        Collection<ChessMove> moves = new ArrayList<>();
+    public Collection<ChessPosition> grabTeamColorCoverage(ChessGame.TeamColor teamColor) {
+        Collection<ChessPosition> positions = new ArrayList<>();
 
-        return moves;
+        return positions;
     }
     
     @Override

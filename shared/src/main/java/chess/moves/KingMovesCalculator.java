@@ -18,7 +18,7 @@ public class KingMovesCalculator extends PieceMovesCalculator {
      * @return A collection of valid chess moves (moves that would place the king in danger are not counted for)
      */
     @Override
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece) {
+    public Collection<ChessMove> calculatePieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor) {
         List<ChessMove> moves = new ArrayList<>();
         List<ChessPosition> positions = new ArrayList<>();
 
@@ -35,7 +35,7 @@ public class KingMovesCalculator extends PieceMovesCalculator {
             if((new_position.getColumn() > 0 && new_position.getColumn() < 9) && (new_position.getRow() > 0 && new_position.getRow() < 9)) {
                 if(board.hasPiece(new_position) && !board.isPieceSameColor(new_position,position)){
                     moves.add(new ChessMove(position,new_position,null));
-                } else if(fullCoverage && board.hasPiece(new_position)){
+                } else if(ignoreColor && board.hasPiece(new_position)){
                     moves.add(new ChessMove(position,new_position,null));
                 }else if(!board.hasPiece(new_position)){
                     moves.add(new ChessMove(position,new_position,null));

@@ -15,7 +15,7 @@ public class PawnMovesCalculator extends PieceMovesCalculator {
      * @return A collection of valid chess moves (moves that would place the king in danger are not counted for)
      */
     @Override
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece) {
+    public Collection<ChessMove> calculatePieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor) {
         // Can move forward 2 if in its original spot (6 for black, 1 for white)
         // Can move forward 1 or backwards 1 (forward for white, backward for black)
         // Can move diagonally 1 if there is a piece in that spot
@@ -56,7 +56,7 @@ public class PawnMovesCalculator extends PieceMovesCalculator {
             // If promoting we dont have to add this move
             if (!isNearPromotion(position, piece)) moves.add(d);
             moves.addAll(movesIfPawnNearPromotion(position, diagonal1, piece));
-        }else if(fullCoverage && board.hasPiece(diagonal1)){
+        }else if(ignoreColor && board.hasPiece(diagonal1)){
             moves.addAll(movesIfPawnNearPromotion(position, diagonal1, null));
         }
 
@@ -64,7 +64,7 @@ public class PawnMovesCalculator extends PieceMovesCalculator {
             // If promoting we dont have to add this move
             if(!isNearPromotion(position, piece)) moves.add(d2);
             moves.addAll(movesIfPawnNearPromotion(position, diagonal2, piece));
-        }else if(fullCoverage && board.hasPiece(diagonal2)){
+        }else if(ignoreColor && board.hasPiece(diagonal2)){
             moves.addAll(movesIfPawnNearPromotion(position, diagonal2, null));
         }
 

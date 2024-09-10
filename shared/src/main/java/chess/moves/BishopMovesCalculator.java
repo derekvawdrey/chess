@@ -18,15 +18,13 @@ public class BishopMovesCalculator extends PieceMovesCalculator {
      * @return A collection of valid chess moves (moves that would place the king in danger are not counted for)
      */
     @Override
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece) {
+    public Collection<ChessMove> calculatePieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor) {
         Collection<ChessMove> moves = new ArrayList<>();
 
-        moves.addAll(calculateMoveByDirection(board, position, piece, Direction.topLeft));
-        moves.addAll(calculateMoveByDirection(board, position, piece, Direction.topRight));
-        moves.addAll(calculateMoveByDirection(board, position, piece, Direction.bottomLeft));
-        moves.addAll(calculateMoveByDirection(board, position, piece, Direction.bottomRight));
-
-
+        moves.addAll(calculateMoveByDirection(board, position, piece, Direction.topLeft, ignoreColor));
+        moves.addAll(calculateMoveByDirection(board, position, piece, Direction.topRight, ignoreColor));
+        moves.addAll(calculateMoveByDirection(board, position, piece, Direction.bottomLeft, ignoreColor));
+        moves.addAll(calculateMoveByDirection(board, position, piece, Direction.bottomRight, ignoreColor));
 
         return moves;
     }
@@ -38,7 +36,7 @@ public class BishopMovesCalculator extends PieceMovesCalculator {
         bottomRight
     }
 
-    private Collection<ChessMove> calculateMoveByDirection(ChessBoard board, ChessPosition position, ChessPiece piece, Direction direction) {
+    private Collection<ChessMove> calculateMoveByDirection(ChessBoard board, ChessPosition position, ChessPiece piece, Direction direction, boolean ignoreColor) {
         Collection<ChessMove> moves = new ArrayList<>();
         int rowIncrement = (direction == Direction.topLeft || direction == Direction.topRight) ? 1 : -1;
         int colIncrement = (direction == Direction.topRight || direction == Direction.bottomRight) ? 1 : -1;
@@ -54,7 +52,7 @@ public class BishopMovesCalculator extends PieceMovesCalculator {
                 moves.add(new ChessMove(position, newPosition, null));
                 break;
             } else if(board.hasPiece(newPosition)){
-                if(this.fullCoverage){
+                if(ignoreColor){
                     moves.add(new ChessMove(position, newPosition, null));
                 }
                 break;

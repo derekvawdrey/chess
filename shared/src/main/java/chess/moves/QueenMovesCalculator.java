@@ -18,11 +18,11 @@ public class QueenMovesCalculator extends PieceMovesCalculator {
      * @return A collection of valid chess moves (moves that would place the king in danger are not counted for)
      */
     @Override
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece) {
+    public Collection<ChessMove> calculatePieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor) {
         // This is ltierally a combination of Rook and Bishop moves, we can just combine them here.
         Collection<ChessMove> moves = new ArrayList<>();
-        moves.addAll(new BishopMovesCalculator().pieceMoves(board, position, piece));
-        moves.addAll(new RookMovesCalculator().pieceMoves(board, position, piece));
+        moves.addAll(new BishopMovesCalculator().calculatePieceMoves(board, position, piece, ignoreColor));
+        moves.addAll(new RookMovesCalculator().calculatePieceMoves(board, position, piece, ignoreColor));
         return moves;
     }
 

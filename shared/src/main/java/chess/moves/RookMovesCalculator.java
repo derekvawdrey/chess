@@ -18,14 +18,14 @@ public class RookMovesCalculator extends PieceMovesCalculator {
      * @return A collection of valid chess moves (moves that would place the king in danger are not counted for)
      */
     @Override
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece) {
+    public Collection<ChessMove> calculatePieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor) {
         List<ChessMove> moves = new ArrayList<>();
 
         // Left to Right, top to bottom. Do each 4 and then when they detect a piece, those are the moves it can do up to that point
-        moves.addAll(calculateSingleDirection(board, position, piece, Direction.UP));
-        moves.addAll(calculateSingleDirection(board, position, piece, Direction.DOWN));
-        moves.addAll(calculateSingleDirection(board, position, piece, Direction.LEFT));
-        moves.addAll(calculateSingleDirection(board, position, piece, Direction.RIGHT));
+        moves.addAll(calculateSingleDirection(board, position, piece, Direction.UP, ignoreColor));
+        moves.addAll(calculateSingleDirection(board, position, piece, Direction.DOWN, ignoreColor));
+        moves.addAll(calculateSingleDirection(board, position, piece, Direction.LEFT, ignoreColor));
+        moves.addAll(calculateSingleDirection(board, position, piece, Direction.RIGHT, ignoreColor));
 
         return moves;
     }
@@ -42,7 +42,7 @@ public class RookMovesCalculator extends PieceMovesCalculator {
      * @param direction
      * @return a set of moves
      */
-    private Collection<ChessMove> calculateSingleDirection(ChessBoard board, ChessPosition position, ChessPiece piece, Direction direction) {
+    private Collection<ChessMove> calculateSingleDirection(ChessBoard board, ChessPosition position, ChessPiece piece, Direction direction, boolean ignoreColor) {
         List<ChessMove> moves = new ArrayList<>();
         int incrementer = (direction == Direction.UP || direction == Direction.RIGHT) ? 1 : -1;
         int anchorPoint = (direction == Direction.UP || direction == Direction.DOWN) ? position.getRow() + incrementer: position.getColumn() + incrementer;
@@ -62,7 +62,7 @@ public class RookMovesCalculator extends PieceMovesCalculator {
                 // If the piece is of the opposite color, we can take it
                 if(!board.isPieceSameColor(position, end_position)){
                     moves.add(new ChessMove(position, end_position,null));
-                }else if(this.fullCoverage){
+                }else if(ignoreColor){
                     moves.add(new ChessMove(position, end_position,null));
                 }
                 break;

@@ -8,13 +8,51 @@ import chess.ChessPosition;
 import java.util.Collection;
 
 public abstract class PieceMovesCalculator {
-    /// Will ignore color when determining possible moves.
-    protected boolean fullCoverage = false;
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece) {
+
+    /**
+     *
+     * @param board
+     * @param position
+     * @param piece
+     * @param ignoreColor
+     * @return
+     */
+    public Collection<ChessMove> calculatePieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor){
         return null;
     }
 
-    public void setFullCoverage(boolean fullCoverage) {
-        this.fullCoverage = fullCoverage;
+    /**
+     * Returns a collection of possible moves the piece can do, excluding other color pieces, and validity of moves.
+     * @param board
+     * @param position
+     * @param piece
+     * @return
+     */
+    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece) {
+        return calculatePieceMoves(board, position, piece, false);
     }
+
+    /**
+     * Returns a collection of possible moves the piece can take or move
+     * @param board
+     * @param position
+     * @param piece
+     * @param ignoreColor
+     * @return
+     */
+    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor) {
+        return calculatePieceMoves(board, position, piece, true);
+    }
+
+    /**
+     * Calculates the chess positions that the piece covers
+     * @param board
+     * @param position
+     * @param piece
+     * @return A collection of chess positions
+     */
+    public Collection<ChessPosition> pieceCoverage(ChessBoard board, ChessPosition position, ChessPiece piece) {
+        return null;
+    }
+
 }

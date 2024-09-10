@@ -62,16 +62,15 @@ public class ChessPiece {
     }
 
     /**
-     * Determines the
+     * Determines the areas the piece covers
+     *
      * @param board
      * @param myPosition
-     * @param ignoreColor tells the calculator to ignore colors when determining wha
      * @return
      */
-    public Collection<ChessMove> pieceCoverage(ChessBoard board, ChessPosition myPosition, boolean ignoreColor) {
+    public Collection<ChessPosition> pieceCoverage(ChessBoard board, ChessPosition myPosition) {
         PieceMovesCalculator calculator = pieceMovesCalculatorFactory.createCalculator(this);
-        calculator.setIgnoreColor(ignoreColor);
-        return calculator.pieceMoves(board, myPosition, this);
+        return calculator.pieceCoverage(board, myPosition, this);
     }
 
     @Override

@@ -5,6 +5,7 @@ import chess.ChessMove;
 import chess.ChessPiece;
 import chess.ChessPosition;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 public abstract class PieceMovesCalculator {
@@ -37,10 +38,9 @@ public abstract class PieceMovesCalculator {
      * @param board
      * @param position
      * @param piece
-     * @param ignoreColor
      * @return
      */
-    public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor) {
+    public Collection<ChessMove> pieceMovesIgnoreColor(ChessBoard board, ChessPosition position, ChessPiece piece) {
         return calculatePieceMoves(board, position, piece, true);
     }
 
@@ -52,7 +52,12 @@ public abstract class PieceMovesCalculator {
      * @return A collection of chess positions
      */
     public Collection<ChessPosition> pieceCoverage(ChessBoard board, ChessPosition position, ChessPiece piece) {
-        return null;
+        Collection<ChessMove> moves = pieceMovesIgnoreColor(board, position, piece);
+        Collection<ChessPosition> coverage = new ArrayList<>();
+        for (ChessMove move : moves) {
+            coverage.add(move.getEndPosition());
+        }
+        return coverage;
     }
 
 }

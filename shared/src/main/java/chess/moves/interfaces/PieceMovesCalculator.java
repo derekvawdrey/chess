@@ -11,7 +11,7 @@ import java.util.Collection;
 public abstract class PieceMovesCalculator {
 
     /**
-     * Universal class for piece moves
+     * Universal class for piece moves, which calculates the possible (not necessarily valid) moves the piece can do
      * @param board
      * @param position
      * @param piece

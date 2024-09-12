@@ -115,7 +115,40 @@ public class ChessBoard {
     public Collection<ChessPosition> grabTeamColorCoverage(ChessGame.TeamColor teamColor) {
         Collection<ChessPosition> positions = new ArrayList<>();
 
+        for(int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++) {
+                ChessPiece piece = this.board[i][j];
+                if(piece != null && piece.getTeamColor() == teamColor) {
+                    positions.addAll(piece.pieceCoverage(
+                    this,
+                        new ChessPosition(i+1,j+1)
+                    ));
+                }
+            }
+        }
+
         return positions;
+    }
+
+    /**
+     * Returns the kings position for the selected teams color
+     * @param teamColor
+     * @return a ChessPosition object
+     */
+    public ChessPosition findKing(ChessGame.TeamColor teamColor){
+        for(int i = 0; i < 8; i++) {
+            for(int j = 0; j < 8; j++) {
+                ChessPiece piece = this.board[i][j];
+                if(
+                    piece != null &&
+                    piece.getPieceType() == ChessPiece.PieceType.KING &&
+                    piece.getTeamColor() == teamColor
+                ) {
+                    return new ChessPosition(i+1,j+1);
+                }
+            }
+        }
+        return null;
     }
     
     @Override

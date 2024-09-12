@@ -48,7 +48,7 @@ public class ChessGame {
      *
      * @param startPosition the piece to get valid moves for
      * @return Set of valid moves for requested piece, or null if no piece at
-     * 
+     *
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
         ChessPiece movingPiece = this.chessBoard.getPiece(startPosition);
@@ -65,10 +65,12 @@ public class ChessGame {
                     validMoves.add(move);
                 }
             }
-        }else{
-            // If the piece is not king, you don't need to worry about calclating any valid pieces
-            validMoves.addAll(moves);
+            return validMoves;
         }
+
+        // If the king is in check, determine if you can move to put the king out of check. If you can't return an empty list
+        // If the king is not in check, determine if your move would put the king in check.
+
 
 
 
@@ -92,7 +94,13 @@ public class ChessGame {
      * @return True if the specified team is in check
      */
     public boolean isInCheck(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
+        TeamColor oppositeTeamColor = teamColor == TeamColor.BLACK ? TeamColor.WHITE : TeamColor.BLACK;
+
+        // If the king is included in the enemy coverage
+        Collection<ChessPosition> enemyCoverage = this.chessBoard.grabTeamColorCoverage(oppositeTeamColor);
+        ChessPosition kingPosition = this.chessBoard.findKing(teamColor);
+
+        return enemyCoverage.contains(kingPosition);
     }
 
     /**

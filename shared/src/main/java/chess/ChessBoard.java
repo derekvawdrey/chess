@@ -18,6 +18,10 @@ public class ChessBoard {
         this.board = new ChessPiece[8][8];
     }
 
+    public ChessBoard(ChessPiece[][] board){
+        this.board = board.clone();
+    }
+
     /**
      * Adds a chess piece to the chessboard
      *
@@ -27,6 +31,23 @@ public class ChessBoard {
     public void addPiece(ChessPosition position, ChessPiece piece) {
         // Does this need to throw an exception if a piece is added to a place where a piece already exists?
         this.board[position.getRow()-1][position.getColumn()-1] = piece;
+    }
+
+    /**
+     * This sets a piece in a specific position without changing the games state (turn wise)
+     * Used for testing if a pieces move is valid or not
+     * @param endPosition the position the piece is moving to
+     * @param piece the piece moving
+     * @return the chess piece that was in the chess position
+     */
+    public ChessPiece setPiece(ChessPosition endPosition, ChessPiece piece) {
+        int row = endPosition.getRow() - 1;
+        int col = endPosition.getColumn() - 1;
+
+        ChessPiece previousPiece = this.board[row][col];
+        this.board[row][col] = piece;
+
+        return previousPiece;
     }
 
     /**
@@ -131,6 +152,14 @@ public class ChessBoard {
     }
 
     /**
+     * Returns all pieces in array form
+     * @return returns 2d array of chess pieces
+     */
+    public ChessPiece[][] getBoard() {
+        return board;
+    }
+
+    /**
      * Returns the kings position for the selected teams color
      * @param teamColor
      * @return a ChessPosition object
@@ -150,11 +179,9 @@ public class ChessBoard {
         }
         return null;
     }
-    
+
     @Override
     public int hashCode() {
-
-
         // TODO: IMPLEMENT
         return super.hashCode();
     }

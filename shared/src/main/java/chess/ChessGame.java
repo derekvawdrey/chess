@@ -57,6 +57,7 @@ public class ChessGame {
         Collection<ChessMove> moves = new ArrayList<>(movingPiece.pieceMoves(chessBoard, startPosition));
         Collection<ChessMove> validMoves = new ArrayList<>();
         TeamColor oppositeTeamColor = movingPiece.getTeamColor() == TeamColor.BLACK ? TeamColor.WHITE : TeamColor.BLACK;
+
         if(movingPiece.getPieceType() == ChessPiece.PieceType.KING){
             // For king, determine if piece would be in danger, and then remove those positions from the moves
             Collection<ChessPosition> enemyCoverage = this.chessBoard.grabTeamColorCoverage(oppositeTeamColor);
@@ -68,9 +69,20 @@ public class ChessGame {
             return validMoves;
         }
 
-        // If the king is in check, determine if you can move to put the king out of check. If you can't return an empty list
-        // If the king is not in check, determine if your move would put the king in check.
+        ChessBoard tempBoard = new ChessBoard(this.chessBoard.getBoard());
+        // If the king is in check, determine if you can move to put the king out of check.
+        // This means you can either block the move, or take the piece
+        for(ChessMove move : moves) {
+            ChessPiece capturedPiece = tempBoard.setPiece(move.getEndPosition(), movingPiece);
+            tempBoard.setPiece(move.getStartPosition(), null);
+            if(!this.isInCheck(movingPiece.getTeamColor(), tempBoard)){
+                validMoves.add(move);
+            }
+            // Undo the move
+            tempBoard.setPiece(move.getStartPosition(), movingPiece);
+            tempBoard.setPiece(move.getEndPosition(), capturedPiece);
 
+        }
 
 
 
@@ -88,17 +100,27 @@ public class ChessGame {
     }
 
     /**
-     * Determines if the given team is in check
+     * Determines if the given team is in check using the current chess board
      *
      * @param teamColor which team to check for check
      * @return True if the specified team is in check
      */
     public boolean isInCheck(TeamColor teamColor) {
+        return isInCheck(teamColor, this.chessBoard);
+    }
+
+    /**
+     * Determines if a given team is in check, for any given chessboard
+     * @param teamColor
+     * @param chessBoard
+     * @return True if the specified team is in check
+     */
+    private boolean isInCheck(TeamColor teamColor, ChessBoard chessBoard){
         TeamColor oppositeTeamColor = teamColor == TeamColor.BLACK ? TeamColor.WHITE : TeamColor.BLACK;
 
         // If the king is included in the enemy coverage
-        Collection<ChessPosition> enemyCoverage = this.chessBoard.grabTeamColorCoverage(oppositeTeamColor);
-        ChessPosition kingPosition = this.chessBoard.findKing(teamColor);
+        Collection<ChessPosition> enemyCoverage = chessBoard.grabTeamColorCoverage(oppositeTeamColor);
+        ChessPosition kingPosition = chessBoard.findKing(teamColor);
 
         return enemyCoverage.contains(kingPosition);
     }

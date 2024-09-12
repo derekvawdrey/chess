@@ -119,13 +119,20 @@ public class ChessBoard {
     }
 
     /**
-     * Grabs all pieces on the board
-     * @return a collection of ChessPiece
+     * Grabs all chess pieces for a teams color
+     * @param teamColor
+     * @return Collection of chess pieces
      */
-    public Collection<ChessPiece> grabAllPieces(){
-        Collection<ChessPiece> pieces = new ArrayList<>();
+    public Collection<ChessPosition> getTeamColorPiecePositions(ChessGame.TeamColor teamColor) {
+        Collection<ChessPosition> teamColorPiecePositions = new ArrayList<>();
 
-        return pieces;
+        for(int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
+                ChessPiece piece = this.board[i][j];
+                if(piece != null && piece.getTeamColor() == teamColor) teamColorPiecePositions.add(new ChessPosition(i+1,j+1));
+            }
+        }
+        return teamColorPiecePositions;
     }
 
     /**

@@ -1,5 +1,6 @@
 package chess;
 
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -132,7 +133,17 @@ public class ChessGame {
      * @return True if the specified team is in checkmate
      */
     public boolean isInCheckmate(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
+        if(!isInCheck(teamColor, this.chessBoard)){
+            return false;
+        }
+        
+        Collection<ChessMove> chessMoves = new ArrayList<>();
+        Collection<ChessPosition> chessPositions = this.chessBoard.getTeamColorPiecePositions(teamColor);
+        for(ChessPosition position : chessPositions){
+            chessMoves.addAll(this.validMoves(position));
+        }
+
+        return chessMoves.isEmpty();
     }
 
     /**
@@ -143,7 +154,17 @@ public class ChessGame {
      * @return True if the specified team is in stalemate, otherwise false
      */
     public boolean isInStalemate(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
+        if(isInCheck(teamColor, this.chessBoard)){
+            return false;
+        }
+
+        Collection<ChessMove> chessMoves = new ArrayList<>();
+        Collection<ChessPosition> chessPositions = this.chessBoard.getTeamColorPiecePositions(teamColor);
+        for(ChessPosition position : chessPositions){
+            chessMoves.addAll(this.validMoves(position));
+        }
+
+        return chessMoves.isEmpty();
     }
 
     /**

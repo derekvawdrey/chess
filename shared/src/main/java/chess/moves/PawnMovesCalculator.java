@@ -92,6 +92,7 @@ public class PawnMovesCalculator extends PieceMovesCalculator {
      * @return a boolean
      */
     private boolean isNearPromotion(ChessPosition position, ChessPiece piece) {
+        if(piece == null) return false;
         return (piece.getTeamColor() == ChessGame.TeamColor.WHITE && position.getRow() == 7)
                 || (piece.getTeamColor() == ChessGame.TeamColor.BLACK && position.getRow() == 2);
     }

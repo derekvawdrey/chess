@@ -18,6 +18,7 @@ public class ChessGame {
     public ChessGame() {
         this.currentTeam = TeamColor.WHITE;
         chessBoard = new ChessBoard();
+        chessBoard.resetBoard();
     }
 
     /**
@@ -84,9 +85,7 @@ public class ChessGame {
             tempBoard.setPiece(move.getEndPosition(), capturedPiece);
 
         }
-
-
-
+        
         return validMoves;
     }
 
@@ -99,6 +98,10 @@ public class ChessGame {
     public void makeMove(ChessMove move) throws InvalidMoveException {
         ChessPiece piece = this.chessBoard.getPiece(move.getStartPosition());
         if(piece == null) throw new InvalidMoveException();
+        if(this.getTeamTurn() != piece.getTeamColor()){
+            throw new InvalidMoveException();
+        }
+
 
         if(this.validMoves(move.getStartPosition()).contains(move)){
 
@@ -110,6 +113,7 @@ public class ChessGame {
 
 
             this.chessBoard.setPiece(move.getStartPosition(),null);
+            this.setTeamTurn(this.getTeamTurn() == TeamColor.BLACK ? TeamColor.WHITE : TeamColor.BLACK);
         }else{
             throw new InvalidMoveException();
         }
@@ -155,10 +159,13 @@ public class ChessGame {
         Collection<ChessMove> chessMoves = new ArrayList<>();
         Collection<ChessPosition> chessPositions = this.chessBoard.getTeamColorPiecePositions(teamColor);
         for(ChessPosition position : chessPositions){
-            chessMoves.addAll(this.validMoves(position));
+            Collection<ChessMove> validMovesForPiece = this.validMoves(position);
+            if(!validMovesForPiece.isEmpty()){
+                return false;
+            }
         }
 
-        return chessMoves.isEmpty();
+        return true;
     }
 
     /**
@@ -169,9 +176,15 @@ public class ChessGame {
      * @return True if the specified team is in stalemate, otherwise false
      */
     public boolean isInStalemate(TeamColor teamColor) {
+        ChessPosition kingPosition = chessBoard.findKing(teamColor);
+        if(kingPosition == null) return false;
+
         if(this.isInCheck(teamColor)){
             return false;
         }
+
+
+
 
         Collection<ChessMove> chessMoves = new ArrayList<>();
         Collection<ChessPosition> chessPositions = this.chessBoard.getTeamColorPiecePositions(teamColor);

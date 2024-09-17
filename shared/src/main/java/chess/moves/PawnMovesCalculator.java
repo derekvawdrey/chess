@@ -120,4 +120,23 @@ public class PawnMovesCalculator extends PieceMovesCalculator {
         }
         return moves;
     }
+
+
+    /**
+     * Calculates the chess positions that the piece covers, this is unique for pawn
+     * @param board
+     * @param position
+     * @param piece
+     * @return A collection of chess positions that the piece covers
+     */
+    @Override
+    public Collection<ChessPosition> pieceCoverage(ChessBoard board, ChessPosition position, ChessPiece piece) {
+        int colorMod = piece.getTeamColor() == ChessGame.TeamColor.BLACK ? -1 : 1;
+        ChessPosition diagonal1 = new ChessPosition(position.getRow() + colorMod, position.getColumn() - colorMod);
+        ChessPosition diagonal2 = new ChessPosition(position.getRow() + colorMod, position.getColumn() + colorMod);
+        Collection<ChessPosition> coverage = new ArrayList<>();
+        coverage.add(diagonal1);
+        coverage.add(diagonal2);
+        return coverage;
+    }
 }

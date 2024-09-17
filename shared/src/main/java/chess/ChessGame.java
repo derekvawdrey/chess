@@ -85,7 +85,7 @@ public class ChessGame {
             tempBoard.setPiece(move.getEndPosition(), capturedPiece);
 
         }
-        
+
         return validMoves;
     }
 

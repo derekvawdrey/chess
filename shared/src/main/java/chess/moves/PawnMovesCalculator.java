@@ -123,7 +123,7 @@ public class PawnMovesCalculator extends PieceMovesCalculator {
 
 
     /**
-     * Calculates the chess positions that the piece covers, this is unique for pawn
+     * Calculates the chess positions that the piece covers, this is unique for pawn as pawn does not necessarily "cover" the piece directly infront of it
      * @param board
      * @param position
      * @param piece

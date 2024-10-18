@@ -1,13 +1,13 @@
 package dataAccess;
 
-import dataAccess.interfaces.AuthDataAccessInterface;
+import dataAccess.interfaces.SessionDataAccessInterface;
 import model.AuthData;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AuthMemoryDataAccess implements AuthDataAccessInterface {
-
+public class SessionMemoryDataAccess implements SessionDataAccessInterface {
+    // String is authToken and authData is
     Map<String, AuthData> authDataMap = new HashMap<>();
 
     @Override

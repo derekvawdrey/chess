@@ -1,14 +1,10 @@
 package dataAccess.manager;
 
-import dataAccess.AuthMemoryDataAccess;
-import dataAccess.DataAccessType;
-import dataAccess.GameMemoryDataAccess;
-import dataAccess.UserMemoryDataAccess;
-import dataAccess.interfaces.AuthDataAccessInterface;
+import dataAccess.*;
+import dataAccess.interfaces.SessionDataAccessInterface;
 import dataAccess.interfaces.BaseDataAccessInterface;
 import dataAccess.interfaces.GameDataAccessInterface;
 import dataAccess.interfaces.UserDataAccessInterface;
-import model.UserData;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,7 +25,7 @@ public class DataAccessManager {
 
     private void generateDataAccessInstances(){
         if(dataAccessType == DataAccessType.MEMORY_DATA_ACCESS){
-            dataAccessMap.put(AuthDataAccessInterface.class, new AuthMemoryDataAccess());
+            dataAccessMap.put(SessionDataAccessInterface.class, new SessionMemoryDataAccess());
             dataAccessMap.put(GameDataAccessInterface.class, new GameMemoryDataAccess());
             dataAccessMap.put(UserDataAccessInterface.class, new UserMemoryDataAccess());
         }else{
@@ -45,10 +41,10 @@ public class DataAccessManager {
      * @return The DataAccess instance.
      * @throws IllegalArgumentException If the DataAccess is not found.
      */
-    public <T extends BaseDataAccessInterface> T getDataAccess(Class<T> dataAccessClass) {
+    public <T extends BaseDataAccessInterface> T getDataAccess(Class<T> dataAccessClass) throws DataAccessException {
         BaseDataAccessInterface service = dataAccessMap.get(dataAccessClass);
         if (service == null) {
-            throw new IllegalArgumentException("Service not found: " + dataAccessClass.getName());
+            throw new DataAccessException("Service not found: " + dataAccessClass.getName());
         }
         return dataAccessClass.cast(service);
     }

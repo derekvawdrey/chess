@@ -1,13 +1,9 @@
 package handlers;
 
-import service.AuthService;
-import service.BaseService;
+import service.SessionService;
 import service.manager.ServiceManager;
 import spark.Request;
 import spark.Route;
-import spark.Service;
-
-import java.util.Map;
 
 public abstract class BaseHandler {
 
@@ -34,7 +30,7 @@ public abstract class BaseHandler {
      */
     public boolean validAuthToken(Request request){
         String authToken = request.headers("Authorization");
-        AuthService authService = this.serviceManager.getService(AuthService.class);
+        SessionService authService = this.serviceManager.getService(SessionService.class);
         return false;
     }
 

@@ -3,7 +3,7 @@ package dataAccess.interfaces;
 import dataAccess.DataAccessException;
 import model.AuthData;
 
-public interface AuthDataAccessInterface extends BaseDataAccessInterface{
+public interface SessionDataAccessInterface extends BaseDataAccessInterface{
 
     AuthData insertAuth(AuthData authData) throws DataAccessException;
     AuthData removeAuth(String authToken) throws DataAccessException;

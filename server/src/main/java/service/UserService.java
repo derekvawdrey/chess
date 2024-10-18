@@ -1,13 +1,36 @@
 package service;
 
 import dataAccess.DataAccessException;
-import dataAccess.interfaces.GameDataAccessInterface;
+import dataAccess.interfaces.SessionDataAccessInterface;
 import dataAccess.interfaces.UserDataAccessInterface;
 import dataAccess.manager.DataAccessManager;
+import helpers.AuthHelper;
+import model.AuthData;
+import model.UserData;
 
 public class UserService extends BaseService {
     public UserService(DataAccessManager dataAccessManager) {
         super(dataAccessManager);
+    }
+
+    /**
+     * Creates a user and provides an auth token
+     * @param user user information
+     * @return AuthData
+     * @throws DataAccessException If there is an issue with something when fetching information from database
+     */
+    public AuthData createUser(UserData user) throws DataAccessException {
+        UserDataAccessInterface userDataAccess = this.dataAccessManager.getDataAccess(UserDataAccessInterface.class);
+        if(userDataAccess.getUser(user.username()) != null){
+            return null;
+        }
+        userDataAccess.insertUser(user);
+
+        SessionDataAccessInterface authDataAccess = this.dataAccessManager.getDataAccess(SessionDataAccessInterface.class);
+
+        return authDataAccess.insertAuth(
+                new AuthData(AuthHelper.generateUUID(), user.username())
+        );
     }
 
     /**

@@ -1,7 +1,6 @@
 package service;
 
 import dataAccess.DataAccessException;
-import dataAccess.interfaces.AuthDataAccessInterface;
 import dataAccess.interfaces.GameDataAccessInterface;
 import dataAccess.manager.DataAccessManager;
 

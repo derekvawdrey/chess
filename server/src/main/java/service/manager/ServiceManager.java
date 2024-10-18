@@ -1,7 +1,7 @@
 package service.manager;
 
 import dataAccess.manager.DataAccessManager;
-import service.AuthService;
+import service.SessionService;
 import service.GameService;
 import service.BaseService;
 import service.UserService;
@@ -28,7 +28,7 @@ public class ServiceManager {
      * Generates all necessary Services, to be used in handlers.
      */
     private void generateServices(){
-        this.services.put(AuthService.class, new AuthService(dataAccessManager));
+        this.services.put(SessionService.class, new SessionService(dataAccessManager));
         this.services.put(UserService.class, new UserService(dataAccessManager));
         this.services.put(GameService.class, new GameService(dataAccessManager));
     }

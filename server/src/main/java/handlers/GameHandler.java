@@ -3,11 +3,9 @@ package handlers;
 import chess.ChessGame;
 import com.google.gson.Gson;
 import dataAccess.DataAccessException;
-import model.CreateGameRequest;
-import model.GameData;
-import model.GameListResult;
-import model.LoginRequest;
+import model.*;
 import service.GameService;
+import service.SessionService;
 import service.UserService;
 import service.manager.ServiceManager;
 import spark.Request;
@@ -32,6 +30,28 @@ public class GameHandler extends BaseHandler{
     public void initHandler() {
         Spark.get(this.root, verifyAuth(this::getListOfGames));
         Spark.post(this.root, verifyAuth(this::createGame));
+        Spark.put(this.root, verifyAuth(this::joinGame));
+    }
+
+    public Object joinGame(Request req, Response res) throws ExceptionHandler, DataAccessException {
+        GameService gameService = this.serviceManager.getService(GameService.class);
+        SessionService sessionService = this.serviceManager.getService(SessionService.class);
+        String authToken = req.headers("Authorization");
+
+        AuthData authData = sessionService.getAuthData(authToken);
+        String username = authData.username();
+
+        JoinGameRequest joinGameRequest = JoinGameRequest.fromJson(req.body(), username);
+
+        if(joinGameRequest == null) {
+            throw new ExceptionHandler("bad request", 400);
+        }
+
+        gameService.joinGame(joinGameRequest);
+
+        this.setSuccessHeaders(res);
+        Map<String, Object> jsonResponse = new HashMap<>();
+        return new Gson().toJson(jsonResponse);
     }
 
     public Object createGame(Request req, Response res) throws DataAccessException, ExceptionHandler {
@@ -42,14 +62,11 @@ public class GameHandler extends BaseHandler{
             throw new ExceptionHandler("bad request", 400);
         }
 
-        GameData gameData = new GameData(0, null,null, createGameRequest.gameName(), new ChessGame());
+        GameData gameData = new GameData(0, "", "", createGameRequest.gameName(), new ChessGame());
         GameData newGame = gameService.createGame(gameData);
 
-        Map<String, Object> jsonResponse = new HashMap<>();
-        jsonResponse.put("gameID", newGame.gameId());
-
         this.setSuccessHeaders(res);
-        return new Gson().toJson(jsonResponse);
+        return new Gson().toJson(new CreateGameResponse(newGame.gameId()));
     }
 
     /**

@@ -1,9 +1,7 @@
 package dataAccess;
 
 import dataAccess.interfaces.GameDataAccessInterface;
-import model.GameData;
-import model.GameListResult;
-import model.UserData;
+import model.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +15,16 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
 
     @Override
     public GameListResult getAllGames() {
-        return new GameListResult(new ArrayList<>(gameDataMap.values()));
+        List<GameDataResponse> gameDataResponses = new ArrayList<>();
+        for (GameData gameData : gameDataMap.values()) {
+            gameDataResponses.add(new GameDataResponse(
+                    gameData.gameId(),
+                    gameData.whiteUsername(),
+                    gameData.blackUsername(),
+                    gameData.gameName()
+            ));
+        }
+        return new GameListResult(new ArrayList<>(gameDataResponses));
     }
 
     @Override
@@ -29,16 +36,21 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
     }
 
     @Override
+    public GameData joinGame(JoinGameRequest joinGameRequest) {
+        if(!gameDataMap.containsKey(joinGameRequest.gameID())){
+            return null;
+        }
+        GameData gameData = gameDataMap.get(joinGameRequest.gameID());
+        
+
+    }
+
+    @Override
     public GameData createGame(GameData gameData) {
         GameData newGameData = new GameData(idCounter, gameData.blackUsername(), gameData.whiteUsername(), gameData.gameName(), gameData.game());
         gameDataMap.put(idCounter, newGameData);
         idCounter ++;
         return newGameData;
-    }
-
-    @Override
-    public GameData joinGame(UserData user) {
-        return null;
     }
 
     @Override

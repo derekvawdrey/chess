@@ -5,6 +5,7 @@ import model.GameData;
 import model.GameListResult;
 import model.UserData;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
 
     @Override
     public GameListResult getAllGames() {
-        return new GameListResult((List<GameData>) gameDataMap.values());
+        return new GameListResult(new ArrayList<>(gameDataMap.values()));
     }
 
     @Override

@@ -11,7 +11,7 @@ import java.util.Map;
 public class GameMemoryDataAccess implements GameDataAccessInterface {
     // Game id, GameData
     Map<Integer, GameData> gameDataMap = new HashMap<>();
-    int idCounter = 0;
+    int idCounter = 1;
 
     @Override
     public GameListResult getAllGames() {
@@ -37,13 +37,43 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
 
     @Override
     public GameData joinGame(JoinGameRequest joinGameRequest) {
-        if(!gameDataMap.containsKey(joinGameRequest.gameID())){
+        int gameId = joinGameRequest.gameID();
+        if (!gameDataMap.containsKey(gameId)) {
             return null;
         }
-        GameData gameData = gameDataMap.get(joinGameRequest.gameID());
-        
 
+        GameData gameData = gameDataMap.get(gameId);
+        String playerColor = joinGameRequest.playerColor();
+
+        if ("WHITE".equals(playerColor)) {
+            return joinGameAsWhite(joinGameRequest, gameData);
+        } else {
+            return joinGameAsBlack(joinGameRequest, gameData);
+        }
     }
+    // TODO: MAKE THIS BETTER BECAUSE PROBABLY SHOULDNT BE HERE LOL
+    private GameData joinGameAsWhite(JoinGameRequest joinGameRequest, GameData gameData) {
+        if (gameData.whiteUsername().isEmpty()) {
+            GameData newGameData = createNewGameData(gameData, joinGameRequest.username(), gameData.blackUsername());
+            gameDataMap.put(newGameData.gameId(), newGameData);
+            return newGameData;
+        }
+        return null;
+    }
+
+    private GameData joinGameAsBlack(JoinGameRequest joinGameRequest, GameData gameData) {
+        if (gameData.blackUsername().isEmpty()) {
+            GameData newGameData = createNewGameData(gameData, gameData.whiteUsername(), joinGameRequest.username());
+            gameDataMap.put(newGameData.gameId(), newGameData);
+            return newGameData;
+        }
+        return null;
+    }
+
+    private GameData createNewGameData(GameData gameData, String whiteUsername, String blackUsername) {
+        return new GameData(gameData.gameId(), whiteUsername, blackUsername, gameData.gameName(), gameData.game());
+    }
+
 
     @Override
     public GameData createGame(GameData gameData) {

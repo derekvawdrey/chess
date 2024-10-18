@@ -2,6 +2,7 @@ package handlers;
 
 import chess.ChessGame;
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import dataAccess.DataAccessException;
 import model.*;
 import service.GameService;
@@ -41,13 +42,21 @@ public class GameHandler extends BaseHandler{
         AuthData authData = sessionService.getAuthData(authToken);
         String username = authData.username();
 
-        JoinGameRequest joinGameRequest = JoinGameRequest.fromJson(req.body(), username);
+        JsonObject jsonObject = new Gson().fromJson(req.body(), JsonObject.class);
+        jsonObject.addProperty("username", username);
+        String modifiedJson = new Gson().toJson(jsonObject);
+
+
+        JoinGameRequest joinGameRequest = JoinGameRequest.fromJson(modifiedJson);
 
         if(joinGameRequest == null) {
             throw new ExceptionHandler("bad request", 400);
         }
 
-        gameService.joinGame(joinGameRequest);
+        GameData game = gameService.joinGame(joinGameRequest);
+        if(game == null){
+            throw new ExceptionHandler("already taken", 403);
+        }
 
         this.setSuccessHeaders(res);
         Map<String, Object> jsonResponse = new HashMap<>();

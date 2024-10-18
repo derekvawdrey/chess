@@ -1,4 +1,4 @@
-package dataaccess.interfaces;
+package dataAccess.interfaces;
 
 public interface GameDataAccessInterface {
 

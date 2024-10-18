@@ -11,7 +11,7 @@ import java.util.Map;
 
 public abstract class BaseHandler {
 
-    private final ServiceManager serviceManager;
+    protected final ServiceManager serviceManager;
     protected String root;
 
     /**

@@ -1,13 +1,18 @@
 package server;
 
+import com.google.gson.Gson;
+import dataAccess.DataAccessException;
 import dataAccess.manager.DataAccessManager;
 import dataAccess.DataAccessType;
 import handlers.*;
 import service.manager.ServiceManager;
+import spark.Response;
 import spark.Spark;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Server {
 
@@ -50,6 +55,16 @@ public class Server {
 
         // Register your endpoints and handle exceptions here.
 
+        Spark.exception(ExceptionHandler.class, (exception, request, response) -> {
+            response.status(exception.getStatusCode());
+            handleException(exception, response);
+        });
+
+        Spark.exception(DataAccessException.class, (exception, request, response) -> {
+            response.status(500);
+            handleException(exception, response);
+        });
+
         initalizeHandlers();
 
         //This line initializes the server and can be removed once you have a functioning endpoint 
@@ -57,6 +72,13 @@ public class Server {
 
         Spark.awaitInitialization();
         return Spark.port();
+    }
+
+    public void handleException(Exception exception, Response response){
+        response.type("application/json");
+        Map<String, String> errorResponse = new HashMap<>();
+        errorResponse.put("message", "Error: " + exception.getMessage());
+        response.body(new Gson().toJson(errorResponse));
     }
 
     public void stop() {

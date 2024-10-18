@@ -9,7 +9,7 @@ import java.util.List;
 public interface GameDataAccessInterface extends BaseDataAccessInterface {
 
     GameListResult getAllGames();
-    GameData getGame();
+    GameData getGame(int gameId);
     GameData joinGame(UserData user);
     void deleteAllGames();
 }

@@ -1,4 +1,9 @@
 package service;
 
-public class GameService {
+import dataAccess.manager.DataAccessManager;
+
+public class GameService extends BaseService {
+    public GameService(DataAccessManager dataAccessManager) {
+        super(dataAccessManager);
+    }
 }

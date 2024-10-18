@@ -3,7 +3,7 @@ package dataAccess.interfaces;
 import dataAccess.DataAccessException;
 import model.UserData;
 
-public interface UserDataAccessInterface {
+public interface UserDataAccessInterface extends BaseDataAccessInterface{
 
     UserData getUser(String username) throws DataAccessException;
     UserData insertUser(UserData user) throws DataAccessException;

@@ -1,8 +1,44 @@
 package server;
 
-import spark.*;
+import dataAccess.manager.DataAccessManager;
+import dataAccess.DataAccessType;
+import handlers.BaseHandler;
+import service.manager.ServiceManager;
+import spark.Spark;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
+
+
+    private final List<BaseHandler> handlers;
+    private final DataAccessManager dataAccessManager;
+    private final ServiceManager serviceManager;
+
+    public Server() {
+        this.handlers = new ArrayList<>();
+        this.dataAccessManager = new DataAccessManager(DataAccessType.MEMORY_DATA_ACCESS);
+        this.serviceManager = new ServiceManager(dataAccessManager);
+
+        this.createHandlers();
+    }
+
+    /**
+     * Creates the handler classes
+     */
+    private void createHandlers(){
+
+    }
+
+    /**
+     * This initalizes all routes that the handlers control
+     */
+    private void initalizeHandlers(){
+        for(BaseHandler handler : handlers){
+            handler.initHandler();
+        }
+    }
 
     public int run(int desiredPort) {
         Spark.port(desiredPort);
@@ -10,6 +46,8 @@ public class Server {
         Spark.staticFiles.location("web");
 
         // Register your endpoints and handle exceptions here.
+
+        initalizeHandlers();
 
         //This line initializes the server and can be removed once you have a functioning endpoint 
         Spark.init();

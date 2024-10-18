@@ -1,4 +1,9 @@
 package service;
 
-public class UserService {
+import dataAccess.manager.DataAccessManager;
+
+public class UserService extends BaseService {
+    public UserService(DataAccessManager dataAccessManager) {
+        super(dataAccessManager);
+    }
 }

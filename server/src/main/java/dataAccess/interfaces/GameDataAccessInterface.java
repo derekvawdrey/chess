@@ -1,6 +1,6 @@
 package dataAccess.interfaces;
 
-public interface GameDataAccessInterface {
+public interface GameDataAccessInterface extends BaseDataAccessInterface {
 
 
     void deleteAllGames();

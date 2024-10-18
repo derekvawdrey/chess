@@ -1,5 +1,10 @@
 package service;
 
-public class AuthService {
+import dataAccess.manager.DataAccessManager;
 
+public class AuthService extends BaseService {
+
+    public AuthService(DataAccessManager dataAccessManager) {
+        super(dataAccessManager);
+    }
 }

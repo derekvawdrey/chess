@@ -58,7 +58,7 @@ public abstract class BaseHandler {
     public Route verifyAuth(Route route) {
         return (request, response) -> {
             if (!validAuthToken(request)) {
-                throw new ExceptionHandler("unauthorized", 403);
+                throw new ExceptionHandler("unauthorized", 401);
             }
             return route.handle(request, response);
         };

@@ -43,10 +43,10 @@ public class GameHandler extends BaseHandler{
         }
 
         GameData gameData = new GameData(0, null,null, createGameRequest.gameName(), new ChessGame());
-        gameService.createGame(gameData);
+        GameData newGame = gameService.createGame(gameData);
 
         Map<String, Object> jsonResponse = new HashMap<>();
-        jsonResponse.put("gameID", gameData.gameId());
+        jsonResponse.put("gameID", newGame.gameId());
 
         this.setSuccessHeaders(res);
         return new Gson().toJson(jsonResponse);

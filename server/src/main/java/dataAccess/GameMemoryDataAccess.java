@@ -11,8 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 public class GameMemoryDataAccess implements GameDataAccessInterface {
-    // Game name, GameData
+    // Game id, GameData
     Map<Integer, GameData> gameDataMap = new HashMap<>();
+    int idCounter = 0;
 
     @Override
     public GameListResult getAllGames() {
@@ -25,6 +26,14 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
             return gameDataMap.get(gameId);
         }
         return null;
+    }
+
+    @Override
+    public GameData createGame(GameData gameData) {
+        GameData newGameData = new GameData(idCounter, gameData.blackUsername(), gameData.whiteUsername(), gameData.gameName(), gameData.game());
+        gameDataMap.put(idCounter, newGameData);
+        idCounter ++;
+        return newGameData;
     }
 
     @Override

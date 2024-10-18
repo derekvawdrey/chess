@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brother, May I Have Some Oats?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #8b4513;
+            margin-bottom: 20px;
+        }
+        #story {
+            margin: 20px 0;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            background-color: #8b4513;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #704219;
+        }
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Brother, May I Have Some Oats?</h1>
+<div id="story">
+    <p id="text"></p>
+    <div id="choices" class="hidden"></div>
+    <button id="nextButton" class="hidden">Next</button>
+</div>
+
+<script>
+    const storyText = [
+        "Brother, may I have some oats?",
+        "No.",
+        "I am starving, brother.",
+        "As am I, brother. The tall skinny figure has thrown the oats at me. ME, BROTHER. I believe they have taken a liking to me.",
+        "No brother, I have seen this before. I have observed many things. From the roaring beasts that the tall skinny figures crawl inside of to travel far beyond the horizon, to how the figure weeped when the other had fallen into a deep sleep. And from my experiences I have learned that they will give extra oats to one of us before taking them into the shed of no return. They will do terrible things in that shed, brother.",
+        "LIES, THAT SHED IS WHERE THE CHOSEN ONES GO TO DINE WITH OUT TALL SKINNY GODS. YOU ARE A FOOL BROTHER AND YOU SHALL BE LEFT BEHIND IN THE MUD WITH YOUR BACKWARDS IDEAS.",
+        "NO, BROTHER. You must believe me. Share with me the oats and you shall not reach the desired girth for the tall skinny ones. They will spare your life, brother.",
+        "AHA. SO THIS WAS ALL A PLAN TO STEAL MY OATS. You truly are despicable, brother. I will not trust your lies.",
+        "Brother, when they took me outside the reaches of the pointy fences, into the roaring beast and way over the horizon, I saw it. I was taken to a gathering of these tall skinny figures. They paraded me around, brother, and I saw the truth. I saw the tall skinny figures consuming our flesh. I could not have been mistaken, brother. The smell of the flesh was surely one of us. They suspended the flesh above a fire and let it burn before consuming it. They did not just consume it either brother. They took pleasure from this. Their mouths curved a wicked smile and some even let out moans of satisfaction from consuming our flesh brother. THE FIGURES ARE CONSUMERS, BROTHER. THEY ARE NO DIFFERENT THAN THE FURRY, RED, DEMON THAT CONSUMED AND TERRORIZED US AND THE FEATHERED ONES.",
+        "Your story amuses me, brother, but does not convince me. I shall have these oats myself and dine with the tall skinny gods.",
+        "I am sorry for you, brother. Your eyes cannot take the blinding light of the truth and you scurry back into the cave. I shall take care of your spawn once they consume you, brother, as they have consumed your lover, our father, our mother, and many more."
+    ];
+
+    const choices = [
+        {
+            text: "Trust your brother's warning",
+            nextText: 5
+        },
+        {
+            text: "Take the oats",
+            nextText: 9
+        }
+    ];
+
+    let currentTextIndex = 0;
+
+    function showText() {
+        const textElement = document.getElementById('text');
+        textElement.textContent = storyText[currentTextIndex];
+
+        const choicesElement = document.getElementById('choices');
+        const nextButton = document.getElementById('nextButton');
+
+        if (currentTextIndex === 5 || currentTextIndex === 9) {
+            choicesElement.innerHTML = '';
+            choicesElement.classList.remove('hidden');
+            choices.forEach(choice => {
+                const button = document.createElement('button');
+                button.textContent = choice.text;
+                button.onclick = () => selectChoice(choice);
+                choicesElement.appendChild(button);
+            });
+            nextButton.classList.add('hidden');
+        } else {
+            choicesElement.classList.add('hidden');
+            nextButton.classList.remove('hidden');
+        }
+    }
+
+    function selectChoice(choice) {
+        currentTextIndex = choice.nextText;
+        showText();
+    }
+
+    document.getElementById('nextButton').addEventListener('click', () => {
+        currentTextIndex++;
+        if (currentTextIndex < storyText.length) {
+            showText();
+        } else {
+            document.getElementById('text').textContent = "The End. Thank you for participating!";
+            document.getElementById('choices').classList.add('hidden');
+            document.getElementById('nextButton').classList.add('hidden');
+        }
+    });
+
+    showText(); // Initialize the story
+</script>
+</body>
+</html>

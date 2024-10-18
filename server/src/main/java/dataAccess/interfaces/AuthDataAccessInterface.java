@@ -9,5 +9,5 @@ public interface AuthDataAccessInterface extends BaseDataAccessInterface{
     AuthData removeAuth(AuthData authData) throws DataAccessException;
     AuthData getAuth(String authToken) throws DataAccessException;
 
-    void deleteAllAuth() throws DataAccessException;
+    void removeAllAuth() throws DataAccessException;
 }

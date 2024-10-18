@@ -10,6 +10,7 @@ public class UserHandler extends BaseHandler{
      */
     public UserHandler(ServiceManager serviceManager) {
         super(serviceManager);
+        this.root = "/user";
     }
 
     @Override

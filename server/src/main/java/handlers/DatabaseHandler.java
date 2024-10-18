@@ -1,6 +1,7 @@
 package handlers;
 
 import service.manager.ServiceManager;
+import spark.Spark;
 
 public class DatabaseHandler extends BaseHandler{
     /**
@@ -10,6 +11,7 @@ public class DatabaseHandler extends BaseHandler{
      */
     public DatabaseHandler(ServiceManager serviceManager) {
         super(serviceManager);
+        this.root = "/db";
     }
 
     @Override

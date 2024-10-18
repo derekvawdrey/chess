@@ -2,7 +2,7 @@ package server;
 
 import dataAccess.manager.DataAccessManager;
 import dataAccess.DataAccessType;
-import handlers.BaseHandler;
+import handlers.*;
 import service.manager.ServiceManager;
 import spark.Spark;
 
@@ -28,7 +28,10 @@ public class Server {
      * Creates the handler classes
      */
     private void createHandlers(){
-
+        this.handlers.add(new SessionHandler(serviceManager));
+        this.handlers.add(new GameHandler(serviceManager));
+        this.handlers.add(new UserHandler(serviceManager));
+        this.handlers.add(new DatabaseHandler(serviceManager));
     }
 
     /**

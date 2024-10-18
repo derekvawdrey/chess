@@ -14,6 +14,7 @@ public class SessionHandler extends BaseHandler{
      */
     public SessionHandler(ServiceManager serviceManager) {
         super(serviceManager);
+        this.root = "/session";
     }
 
     @Override

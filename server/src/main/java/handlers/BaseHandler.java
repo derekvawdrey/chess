@@ -12,6 +12,7 @@ import java.util.Map;
 public abstract class BaseHandler {
 
     private final ServiceManager serviceManager;
+    protected String root;
 
     /**
      * Default constructor for handlers
@@ -51,5 +52,13 @@ public abstract class BaseHandler {
             }
             return route.handle(request, response);
         };
+    }
+
+    /**
+     * Get the endpoint.
+     * @return The endpoint string.
+     */
+    public String getRoot() {
+        return root;
     }
 }

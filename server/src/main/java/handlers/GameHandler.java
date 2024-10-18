@@ -10,6 +10,7 @@ public class GameHandler extends BaseHandler{
      */
     public GameHandler(ServiceManager serviceManager) {
         super(serviceManager);
+        this.root = "/game";
     }
 
     @Override

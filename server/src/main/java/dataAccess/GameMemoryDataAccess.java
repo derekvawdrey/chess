@@ -7,11 +7,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class GameMemoryDataAccess implements GameDataAccessInterface {
     // Game id, GameData
-    Map<Integer, GameData> gameDataMap = new HashMap<>();
-    int idCounter = 1;
+    Map<Integer, GameData> gameDataMap = new ConcurrentHashMap<>();
 
     @Override
     public GameListResult getAllGames() {
@@ -76,9 +76,8 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
 
     @Override
     public GameData createGame(GameData gameData) {
-        GameData newGameData = new GameData(idCounter, gameData.blackUsername(), gameData.whiteUsername(), gameData.gameName(), gameData.game());
-        gameDataMap.put(idCounter, newGameData);
-        idCounter ++;
+        GameData newGameData = new GameData(gameDataMap.size() + 1, gameData.blackUsername(), gameData.whiteUsername(), gameData.gameName(), gameData.game());
+        gameDataMap.put(gameDataMap.size()+1, newGameData);
         return newGameData;
     }
 

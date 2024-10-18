@@ -16,6 +16,6 @@ public class DatabaseHandler extends BaseHandler{
 
     @Override
     public void initHandler() {
-
+        Spark.get(this.root + "/oats", (req, res) -> {res.redirect("/oats.html"); return null;});
     }
 }

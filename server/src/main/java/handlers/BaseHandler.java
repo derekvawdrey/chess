@@ -1,8 +1,11 @@
 package handlers;
 
+import dataAccess.DataAccessException;
+import model.AuthData;
 import service.SessionService;
 import service.manager.ServiceManager;
 import spark.Request;
+import spark.Response;
 import spark.Route;
 
 public abstract class BaseHandler {
@@ -19,6 +22,15 @@ public abstract class BaseHandler {
     }
 
     /**
+     * Sets the success headers as well as the response type
+     * @param response
+     */
+    protected void setSuccessHeaders(Response response) {
+        response.status(200);
+        response.type("application/json");
+    }
+
+    /**
      * initalizes endpoints for the handler, if any.
      */
     public abstract void initHandler();
@@ -28,10 +40,14 @@ public abstract class BaseHandler {
      * @param request
      * @return true of the authToken is valid given username and auth
      */
-    public boolean validAuthToken(Request request){
+    public boolean validAuthToken(Request request) throws DataAccessException {
         String authToken = request.headers("Authorization");
-        SessionService authService = this.serviceManager.getService(SessionService.class);
-        return false;
+        if (authToken == null) {
+            return false;
+        }
+        SessionService sessionService = this.serviceManager.getService(SessionService.class);
+        AuthData authData = sessionService.getAuthData(authToken);
+        return authData != null;
     }
 
     /**
@@ -42,9 +58,7 @@ public abstract class BaseHandler {
     public Route verifyAuth(Route route) {
         return (request, response) -> {
             if (!validAuthToken(request)) {
-                response.status(401);
-                response.body("Unauthorized");
-                return null;
+                throw new ExceptionHandler("unauthorized", 403);
             }
             return route.handle(request, response);
         };

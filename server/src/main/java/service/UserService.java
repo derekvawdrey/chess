@@ -24,12 +24,13 @@ public class UserService extends BaseService {
         if(userDataAccess.getUser(user.username()) != null){
             return null;
         }
-        userDataAccess.insertUser(user);
+        UserData newUser = new UserData(user.username(), AuthHelper.hashPassword(user.password()), user.email());
+        userDataAccess.insertUser(newUser);
 
         SessionDataAccessInterface authDataAccess = this.dataAccessManager.getDataAccess(SessionDataAccessInterface.class);
 
         return authDataAccess.insertAuth(
-                new AuthData(AuthHelper.generateUUID(), user.username())
+                new AuthData(AuthHelper.generateUUID(), newUser.username())
         );
     }
 

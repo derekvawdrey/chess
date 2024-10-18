@@ -28,7 +28,8 @@ public class SessionHandler extends BaseHandler{
 
     @Override
     public void initHandler() {
-        Spark.post(this.root, verifyAuth(this::login));
+        Spark.post(this.root, this::login);
+        Spark.delete(this.root, verifyAuth(this::logout));
     }
 
     /**
@@ -45,17 +46,26 @@ public class SessionHandler extends BaseHandler{
 
         SessionService sessionService = this.serviceManager.getService(SessionService.class);
         AuthData authData = sessionService.login(loginRequest);
+        if(authData == null){
+            throw new ExceptionHandler("unauthorized", 401);
+        }
 
+        this.setSuccessHeaders(response);
         return new Gson().toJson(authData);
     }
 
     /**
-     *
+     * Logs a user out if it is a valid auth token
      * @param req
-     * @param response
+     * @param res
      * @return
      */
-    public Object logout(Request req, Response response) {
+    public Object logout(Request req, Response res) throws DataAccessException {
+        String authToken = req.headers("Authorization");
+        SessionService sessionService = this.serviceManager.getService(SessionService.class);
+        sessionService.logout(authToken);
 
+        this.setSuccessHeaders(res);
+        return new Gson().toJson(new Object());
     }
 }

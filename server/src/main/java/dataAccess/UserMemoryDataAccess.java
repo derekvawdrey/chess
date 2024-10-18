@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UserMemoryDataAccess implements UserDataAccessInterface {
+    // Username, and UserData
     Map<String, UserData> users = new HashMap<>();
 
     @Override

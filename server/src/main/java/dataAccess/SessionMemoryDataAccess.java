@@ -21,9 +21,6 @@ public class SessionMemoryDataAccess implements SessionDataAccessInterface {
 
     @Override
     public AuthData removeAuth(String authToken) throws DataAccessException {
-        if(!authDataMap.containsKey(authToken)){
-            return null;
-        }
         return authDataMap.remove(authToken);
     }
 

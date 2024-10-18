@@ -31,8 +31,8 @@ public class DatabaseHandler extends BaseHandler{
         this.serviceManager.getService(SessionService.class).deleteAll();
         this.serviceManager.getService(GameService.class).deleteAll();
         this.serviceManager.getService(UserService.class).deleteAll();
-        res.status(200);
-        res.type("application/json");
+
+        this.setSuccessHeaders(res);
         return new Gson().toJson(new Object());
     }
 }

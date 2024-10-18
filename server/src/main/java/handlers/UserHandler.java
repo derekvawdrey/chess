@@ -44,6 +44,8 @@ public class UserHandler extends BaseHandler{
         if(authData == null){
             throw new ExceptionHandler("already taken", 403);
         }
+
+        this.setSuccessHeaders(res);
         return new Gson().toJson(authData);
     }
 }

@@ -53,7 +53,7 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
     }
     // TODO: MAKE THIS BETTER BECAUSE PROBABLY SHOULDNT BE HERE LOL
     private GameData joinGameAsWhite(JoinGameRequest joinGameRequest, GameData gameData) {
-        if (gameData.whiteUsername().isEmpty()) {
+        if (gameData.whiteUsername() == null) {
             GameData newGameData = createNewGameData(gameData, joinGameRequest.username(), gameData.blackUsername());
             gameDataMap.put(newGameData.gameId(), newGameData);
             return newGameData;
@@ -62,7 +62,7 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
     }
 
     private GameData joinGameAsBlack(JoinGameRequest joinGameRequest, GameData gameData) {
-        if (gameData.blackUsername().isEmpty()) {
+        if (gameData.blackUsername() == null) {
             GameData newGameData = createNewGameData(gameData, gameData.whiteUsername(), joinGameRequest.username());
             gameDataMap.put(newGameData.gameId(), newGameData);
             return newGameData;
@@ -73,7 +73,6 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
     private GameData createNewGameData(GameData gameData, String whiteUsername, String blackUsername) {
         return new GameData(gameData.gameId(), whiteUsername, blackUsername, gameData.gameName(), gameData.game());
     }
-
 
     @Override
     public GameData createGame(GameData gameData) {

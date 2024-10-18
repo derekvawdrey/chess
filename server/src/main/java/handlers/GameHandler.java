@@ -71,7 +71,7 @@ public class GameHandler extends BaseHandler{
             throw new ExceptionHandler("bad request", 400);
         }
 
-        GameData gameData = new GameData(0, "", "", createGameRequest.gameName(), new ChessGame());
+        GameData gameData = new GameData(0, null, null, createGameRequest.gameName(), new ChessGame());
         GameData newGame = gameService.createGame(gameData);
 
         this.setSuccessHeaders(res);

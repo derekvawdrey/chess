@@ -49,21 +49,21 @@ public class RookMovesCalculator extends PieceMovesCalculator {
         int endPoint = (direction == Direction.UP || direction == Direction.RIGHT) ? 9 : 0;
 
         for(int i = anchorPoint; direction == Direction.DOWN || direction == Direction.LEFT ? i > endPoint : i < endPoint; i+=incrementer) {
-            ChessPosition end_position;
+            ChessPosition endPosition;
             if(direction == Direction.UP || direction == Direction.DOWN) {
-                end_position = new ChessPosition(i, position.getColumn());
+                endPosition = new ChessPosition(i, position.getColumn());
             }else{
-                end_position = new ChessPosition(position.getRow(), i);
+                endPosition = new ChessPosition(position.getRow(), i);
             }
 
-            if(!board.hasPiece(end_position)) {
-                moves.add(new ChessMove(position, end_position,null));
+            if(!board.hasPiece(endPosition)) {
+                moves.add(new ChessMove(position, endPosition,null));
             }else{
                 // If the piece is of the opposite color, we can take it
-                if(!board.isPieceSameColor(position, end_position)){
-                    moves.add(new ChessMove(position, end_position,null));
+                if(!board.isPieceSameColor(position, endPosition)){
+                    moves.add(new ChessMove(position, endPosition,null));
                 }else if(ignoreColor){
-                    moves.add(new ChessMove(position, end_position,null));
+                    moves.add(new ChessMove(position, endPosition,null));
                 }
                 break;
             }

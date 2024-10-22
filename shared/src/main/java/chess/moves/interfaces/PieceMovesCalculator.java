@@ -63,7 +63,7 @@ public abstract class PieceMovesCalculator {
 
     public Collection<ChessMove> getChessMoves(ChessBoard board, ChessPosition position, boolean ignoreColor, List<ChessMove> moves, List<ChessPosition> positions) {
         positions.forEach(newPosition -> {
-            if((newPosition.getColumn() > 0 && newPosition.getColumn() < 9) && (newPosition.getRow() > 0 && new_position.getRow() < 9)) {
+            if((newPosition.getColumn() > 0 && newPosition.getColumn() < 9) && (newPosition.getRow() > 0 && newPosition.getRow() < 9)) {
                 if(board.hasPiece(newPosition) && !board.isPieceSameColor(newPosition,position)){
                     moves.add(new ChessMove(position,newPosition,null));
                 } else if(ignoreColor && board.hasPiece(newPosition)){

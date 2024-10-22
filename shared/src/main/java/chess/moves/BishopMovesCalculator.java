@@ -36,7 +36,9 @@ public class BishopMovesCalculator extends PieceMovesCalculator {
         bottomRight
     }
 
-    private Collection<ChessMove> calculateMoveByDirection(ChessBoard board, ChessPosition position, ChessPiece piece, Direction direction, boolean ignoreColor) {
+    private Collection<ChessMove> calculateMoveByDirection(
+            ChessBoard board, ChessPosition position, ChessPiece piece, Direction direction, boolean ignoreColor
+    ) {
         Collection<ChessMove> moves = new ArrayList<>();
         int rowIncrement = (direction == Direction.topLeft || direction == Direction.topRight) ? 1 : -1;
         int colIncrement = (direction == Direction.topRight || direction == Direction.bottomRight) ? 1 : -1;

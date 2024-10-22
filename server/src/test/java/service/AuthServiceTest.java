@@ -15,9 +15,7 @@ import org.slf4j.LoggerFactory;
 import service.manager.ServiceManager;
 
 public class AuthServiceTest extends ServiceTestBase {
-
-    private static final Logger log = LoggerFactory.getLogger(AuthServiceTest.class);
-
+    
     @BeforeEach
     public void beforeEach() throws DataAccessException {
 
@@ -32,9 +30,9 @@ public class AuthServiceTest extends ServiceTestBase {
     @Order(1)
     @DisplayName("Login Success")
     public void loginSuccess() throws DataAccessException {
-        AuthData logged_in_user = serviceManager.getService(SessionService.class)
+        AuthData loggedInUser = serviceManager.getService(SessionService.class)
                 .login(new LoginRequest("Amongus","sussy"));
-        Assertions.assertNotNull(logged_in_user);
+        Assertions.assertNotNull(loggedInUser);
     }
 
 
@@ -53,8 +51,8 @@ public class AuthServiceTest extends ServiceTestBase {
     @DisplayName("Get Auth Data Success")
     public void getAuthDataSuccess() throws DataAccessException {
         SessionService sessionService = serviceManager.getService(SessionService.class);
-        AuthData logged_in_user = sessionService.login(new LoginRequest("Amongus","sussy"));
-        AuthData getAuthData = sessionService.getAuthData(logged_in_user.authToken());
+        AuthData loggedInUser = sessionService.login(new LoginRequest("Amongus","sussy"));
+        AuthData getAuthData = sessionService.getAuthData(loggedInUser.authToken());
         Assertions.assertNotNull(getAuthData);
     }
 
@@ -72,9 +70,9 @@ public class AuthServiceTest extends ServiceTestBase {
     @DisplayName("Logout success")
     public void logoutSuccess() throws DataAccessException {
         SessionService sessionService = serviceManager.getService(SessionService.class);
-        AuthData logged_in_user = sessionService.login(new LoginRequest("Amongus","sussy"));
-        AuthData logout_info = sessionService.logout(logged_in_user.authToken());
-        Assertions.assertNotNull(logout_info);
+        AuthData loggedInUser = sessionService.login(new LoginRequest("Amongus","sussy"));
+        AuthData logoutInfo = sessionService.logout(loggedInUser.authToken());
+        Assertions.assertNotNull(logoutInfo);
     }
 
     @Test
@@ -82,8 +80,8 @@ public class AuthServiceTest extends ServiceTestBase {
     @DisplayName("Logout Fail")
     public void logoutFail() throws DataAccessException {
         SessionService sessionService = serviceManager.getService(SessionService.class);
-        AuthData logout_info = sessionService.logout("rappi");
-        Assertions.assertNull(logout_info);
+        AuthData logoutInfo = sessionService.logout("rappi");
+        Assertions.assertNull(logoutInfo);
     }
 
     @Test
@@ -91,9 +89,9 @@ public class AuthServiceTest extends ServiceTestBase {
     @DisplayName("deleteAll Success")
     public void deleteAllSuccess() throws DataAccessException {
         SessionService sessionService = serviceManager.getService(SessionService.class);
-        AuthData logged_in_user = sessionService.login(new LoginRequest("Amongus", "sussy"));
+        AuthData loggedInUser = sessionService.login(new LoginRequest("Amongus", "sussy"));
         sessionService.deleteAll();
-        AuthData authData = sessionService.getAuthData(logged_in_user.authToken());
+        AuthData authData = sessionService.getAuthData(loggedInUser.authToken());
         Assertions.assertNull(authData);
 
     }

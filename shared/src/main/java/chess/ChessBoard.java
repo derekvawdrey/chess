@@ -79,7 +79,10 @@ public class ChessBoard {
      * @return
      */
     public boolean hasPiece(ChessPosition position) {
-        if(position.getRow()-1 < 0 || position.getColumn()-1 < 0 || position.getRow()-1 > 7 || position.getColumn()-1 > 7) return false;
+        if(position.getRow()-1 < 0 || position.getColumn()-1 < 0
+                || position.getRow()-1 > 7 || position.getColumn()-1 > 7){
+            return false;
+        }
         return this.board[position.getRow()-1][position.getColumn()-1] != null;
     }
 
@@ -129,7 +132,9 @@ public class ChessBoard {
         for(int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 ChessPiece piece = this.board[i][j];
-                if(piece != null && piece.getTeamColor() == teamColor) teamColorPiecePositions.add(new ChessPosition(i+1,j+1));
+                if(piece != null && piece.getTeamColor() == teamColor){
+                    teamColorPiecePositions.add(new ChessPosition(i+1,j+1));
+                }
             }
         }
         return teamColorPiecePositions;
@@ -189,13 +194,14 @@ public class ChessBoard {
 
     @Override
     public int hashCode() {
-        // TODO: IMPLEMENT
         return super.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if(!(obj instanceof ChessBoard comparingBoard)) return false;
+        if(!(obj instanceof ChessBoard comparingBoard)){
+            return false;
+        }
         // Starts at 1 and goes to 8 because the tests are written in a way that don't necessarily work with Arrays
         for(int i = 1; i < 9; i++) {
             for(int j = 1; j < 9; j++) {
@@ -203,7 +209,9 @@ public class ChessBoard {
                 ChessPiece thisPiece = this.getPiece(position);
                 ChessPiece comparingPiece = comparingBoard.getPiece(position);
 
-                if (!Objects.equals(thisPiece, comparingPiece)) return false;
+                if (!Objects.equals(thisPiece, comparingPiece)) {
+                    return false;
+                }
             }
         }
         return true;

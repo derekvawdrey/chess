@@ -51,7 +51,7 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
             return joinGameAsBlack(joinGameRequest, gameData);
         }
     }
-    // TODO: MAKE THIS BETTER BECAUSE PROBABLY SHOULDNT BE HERE LOL
+
     private GameData joinGameAsWhite(JoinGameRequest joinGameRequest, GameData gameData) {
         if (gameData.whiteUsername() == null) {
             GameData newGameData = createNewGameData(gameData, joinGameRequest.username(), gameData.blackUsername());

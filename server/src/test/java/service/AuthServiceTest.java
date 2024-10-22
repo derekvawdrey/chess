@@ -88,7 +88,7 @@ public class AuthServiceTest {
     @Order(8)
     @DisplayName("deleteAll Fail")
     public void deleteAllFail() throws DataAccessException {
-        
+
     }
 
 }

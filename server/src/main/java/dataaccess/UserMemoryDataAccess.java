@@ -28,11 +28,6 @@ public class UserMemoryDataAccess implements UserDataAccessInterface {
     }
 
     @Override
-    public void deleteUser(String username) throws DataAccessException {
-        users.remove(username);
-    }
-
-    @Override
     public void deleteAllUsers() throws DataAccessException {
         users.clear();
     }

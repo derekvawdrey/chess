@@ -95,6 +95,7 @@ public class AuthServiceTest extends ServiceTestBase {
         sessionService.deleteAll();
         AuthData authData = sessionService.getAuthData(logged_in_user.authToken());
         Assertions.assertNull(authData);
+
     }
 
 }

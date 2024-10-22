@@ -1,6 +1,6 @@
-package dataAccess;
+package dataaccess;
 
-import dataAccess.interfaces.SessionDataAccessInterface;
+import dataaccess.interfaces.SessionDataAccessInterface;
 import model.AuthData;
 
 import java.util.HashMap;

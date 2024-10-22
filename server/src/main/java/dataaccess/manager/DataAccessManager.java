@@ -1,10 +1,10 @@
-package dataAccess.manager;
+package dataaccess.manager;
 
-import dataAccess.*;
-import dataAccess.interfaces.SessionDataAccessInterface;
-import dataAccess.interfaces.BaseDataAccessInterface;
-import dataAccess.interfaces.GameDataAccessInterface;
-import dataAccess.interfaces.UserDataAccessInterface;
+import dataaccess.*;
+import dataaccess.interfaces.SessionDataAccessInterface;
+import dataaccess.interfaces.BaseDataAccessInterface;
+import dataaccess.interfaces.GameDataAccessInterface;
+import dataaccess.interfaces.UserDataAccessInterface;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

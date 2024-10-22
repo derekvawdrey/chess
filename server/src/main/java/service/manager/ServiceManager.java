@@ -1,6 +1,6 @@
 package service.manager;
 
-import dataAccess.manager.DataAccessManager;
+import dataaccess.manager.DataAccessManager;
 import service.SessionService;
 import service.GameService;
 import service.BaseService;

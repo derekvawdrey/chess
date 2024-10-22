@@ -1,6 +1,6 @@
 package service;
 
-import dataAccess.manager.DataAccessManager;
+import dataaccess.manager.DataAccessManager;
 
 public abstract class BaseService {
     DataAccessManager dataAccessManager;

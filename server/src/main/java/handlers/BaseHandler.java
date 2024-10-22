@@ -1,6 +1,6 @@
 package handlers;
 
-import dataAccess.DataAccessException;
+import dataaccess.DataAccessException;
 import model.AuthData;
 import service.SessionService;
 import service.manager.ServiceManager;

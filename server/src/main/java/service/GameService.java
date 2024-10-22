@@ -1,9 +1,8 @@
 package service;
 
-import dataAccess.DataAccessException;
-import dataAccess.interfaces.GameDataAccessInterface;
-import dataAccess.interfaces.UserDataAccessInterface;
-import dataAccess.manager.DataAccessManager;
+import dataaccess.DataAccessException;
+import dataaccess.interfaces.GameDataAccessInterface;
+import dataaccess.manager.DataAccessManager;
 import model.GameData;
 import model.GameListResult;
 import model.JoinGameRequest;

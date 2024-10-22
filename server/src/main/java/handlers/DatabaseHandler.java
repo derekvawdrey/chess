@@ -1,7 +1,7 @@
 package handlers;
 
 import com.google.gson.Gson;
-import dataAccess.DataAccessException;
+import dataaccess.DataAccessException;
 import service.SessionService;
 import service.GameService;
 import service.UserService;

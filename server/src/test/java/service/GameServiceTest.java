@@ -1,11 +1,11 @@
 package service;
 
-import dataAccess.DataAccessException;
-import dataAccess.DataAccessType;
-import dataAccess.interfaces.GameDataAccessInterface;
-import dataAccess.interfaces.SessionDataAccessInterface;
-import dataAccess.interfaces.UserDataAccessInterface;
-import dataAccess.manager.DataAccessManager;
+import dataaccess.DataAccessException;
+import dataaccess.DataAccessType;
+import dataaccess.interfaces.GameDataAccessInterface;
+import dataaccess.interfaces.SessionDataAccessInterface;
+import dataaccess.interfaces.UserDataAccessInterface;
+import dataaccess.manager.DataAccessManager;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;

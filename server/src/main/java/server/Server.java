@@ -1,9 +1,9 @@
 package server;
 
 import com.google.gson.Gson;
-import dataAccess.DataAccessException;
-import dataAccess.manager.DataAccessManager;
-import dataAccess.DataAccessType;
+import dataaccess.DataAccessException;
+import dataaccess.manager.DataAccessManager;
+import dataaccess.DataAccessType;
 import handlers.*;
 import service.manager.ServiceManager;
 import spark.Response;

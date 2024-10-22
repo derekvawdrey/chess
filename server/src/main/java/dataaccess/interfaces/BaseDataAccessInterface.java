@@ -1,4 +1,4 @@
-package dataAccess.interfaces;
+package dataaccess.interfaces;
 
 public interface BaseDataAccessInterface {
 }

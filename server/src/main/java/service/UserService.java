@@ -1,9 +1,9 @@
 package service;
 
-import dataAccess.DataAccessException;
-import dataAccess.interfaces.SessionDataAccessInterface;
-import dataAccess.interfaces.UserDataAccessInterface;
-import dataAccess.manager.DataAccessManager;
+import dataaccess.DataAccessException;
+import dataaccess.interfaces.SessionDataAccessInterface;
+import dataaccess.interfaces.UserDataAccessInterface;
+import dataaccess.manager.DataAccessManager;
 import helpers.AuthHelper;
 import model.AuthData;
 import model.UserData;

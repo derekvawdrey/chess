@@ -1,11 +1,8 @@
-package dataAccess.interfaces;
+package dataaccess.interfaces;
 
 import model.GameData;
 import model.GameListResult;
 import model.JoinGameRequest;
-import model.UserData;
-
-import java.util.List;
 
 public interface GameDataAccessInterface extends BaseDataAccessInterface {
 

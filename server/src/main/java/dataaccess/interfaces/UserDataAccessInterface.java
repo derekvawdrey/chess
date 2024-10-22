@@ -1,6 +1,6 @@
-package dataAccess.interfaces;
+package dataaccess.interfaces;
 
-import dataAccess.DataAccessException;
+import dataaccess.DataAccessException;
 import model.UserData;
 
 public interface UserDataAccessInterface extends BaseDataAccessInterface{

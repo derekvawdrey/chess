@@ -1,4 +1,4 @@
-package dataAccess;
+package dataaccess;
 
 public enum DataAccessType {
     DATABASE,

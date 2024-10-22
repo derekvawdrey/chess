@@ -54,7 +54,9 @@ public class ChessGame {
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
         ChessPiece movingPiece = this.chessBoard.getPiece(startPosition);
-        if(movingPiece == null) return null;
+        if(movingPiece == null){
+            return null;
+        }
 
         Collection<ChessMove> moves = new ArrayList<>(movingPiece.pieceMoves(chessBoard, startPosition));
         Collection<ChessMove> validMoves = new ArrayList<>();
@@ -111,7 +113,8 @@ public class ChessGame {
 
             if(move.getPromotionPiece() != null
                     && piece.getPieceType() == ChessPiece.PieceType.PAWN){
-                this.chessBoard.setPiece(move.getEndPosition(), new ChessPiece(piece.getTeamColor(), move.getPromotionPiece()));
+                this.chessBoard.setPiece(move.getEndPosition(),
+                        new ChessPiece(piece.getTeamColor(), move.getPromotionPiece()));
             }else{
                 this.chessBoard.setPiece(move.getEndPosition(), piece);
             }

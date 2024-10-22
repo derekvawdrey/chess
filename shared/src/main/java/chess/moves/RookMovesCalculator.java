@@ -18,7 +18,8 @@ public class RookMovesCalculator extends PieceMovesCalculator {
      * @return A collection of valid chess moves (moves that would place the king in danger are not counted for)
      */
     @Override
-    public Collection<ChessMove> calculatePieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor) {
+    public Collection<ChessMove> calculatePieceMoves(
+            ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor) {
         List<ChessMove> moves = new ArrayList<>();
 
         // Left to Right, top to bottom. Do each 4 and then when they detect a piece, those are the moves it can do up to that point
@@ -42,10 +43,12 @@ public class RookMovesCalculator extends PieceMovesCalculator {
      * @param direction
      * @return a set of moves
      */
-    private Collection<ChessMove> calculateSingleDirection(ChessBoard board, ChessPosition position, ChessPiece piece, Direction direction, boolean ignoreColor) {
+    private Collection<ChessMove> calculateSingleDirection(
+            ChessBoard board, ChessPosition position, ChessPiece piece, Direction direction, boolean ignoreColor) {
         List<ChessMove> moves = new ArrayList<>();
         int incrementer = (direction == Direction.UP || direction == Direction.RIGHT) ? 1 : -1;
-        int anchorPoint = (direction == Direction.UP || direction == Direction.DOWN) ? position.getRow() + incrementer: position.getColumn() + incrementer;
+        int anchorPoint = (direction == Direction.UP || direction == Direction.DOWN)
+                ? position.getRow() + incrementer: position.getColumn() + incrementer;
         int endPoint = (direction == Direction.UP || direction == Direction.RIGHT) ? 9 : 0;
 
         for(int i = anchorPoint; direction == Direction.DOWN || direction == Direction.LEFT ? i > endPoint : i < endPoint; i+=incrementer) {

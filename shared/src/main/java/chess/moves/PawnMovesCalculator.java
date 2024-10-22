@@ -72,7 +72,8 @@ public class PawnMovesCalculator extends PieceMovesCalculator {
             moves.addAll(movesIfPawnNearPromotion(position, diagonal1, null));
         }
 
-        if(board.hasPiece(diagonal2) && board.getPiece(diagonal2).getTeamColor() == oppositeTeamColor) {
+        if(board.hasPiece(diagonal2) &&
+                board.getPiece(diagonal2).getTeamColor() == oppositeTeamColor) {
             // If promoting we dont have to add this move
             if(!isNearPromotion(position, piece)){
                 moves.add(d2);
@@ -106,7 +107,9 @@ public class PawnMovesCalculator extends PieceMovesCalculator {
      * @return a boolean
      */
     private boolean isNearPromotion(ChessPosition position, ChessPiece piece) {
-        if(piece == null) return false;
+        if(piece == null){
+            return false;
+        }
         return (piece.getTeamColor() == ChessGame.TeamColor.WHITE && position.getRow() == 7)
                 || (piece.getTeamColor() == ChessGame.TeamColor.BLACK && position.getRow() == 2);
     }
@@ -141,14 +144,17 @@ public class PawnMovesCalculator extends PieceMovesCalculator {
 
 
     /**
-     * Calculates the chess positions that the piece covers, this is unique for pawn as pawn does not necessarily "cover" the piece directly infront of it
+     * Calculates the chess positions that the piece covers,
+     * this is unique for pawn as pawn does not necessarily
+     * "cover" the piece directly infront of it
      * @param board
      * @param position
      * @param piece
      * @return A collection of chess positions that the piece covers
      */
     @Override
-    public Collection<ChessPosition> pieceCoverage(ChessBoard board, ChessPosition position, ChessPiece piece) {
+    public Collection<ChessPosition> pieceCoverage(ChessBoard board,
+                                                   ChessPosition position, ChessPiece piece) {
         int colorMod = piece.getTeamColor() == ChessGame.TeamColor.BLACK ? -1 : 1;
         ChessPosition diagonal1 = new ChessPosition(position.getRow() + colorMod,
                 position.getColumn() - colorMod);

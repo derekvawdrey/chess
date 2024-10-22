@@ -62,7 +62,9 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
 
     private GameData joinGameAsBlack(JoinGameRequest joinGameRequest, GameData gameData) {
         if (gameData.blackUsername() == null) {
-            GameData newGameData = createNewGameData(gameData, gameData.whiteUsername(), joinGameRequest.username());
+            GameData newGameData = createNewGameData(
+                    gameData, gameData.whiteUsername(), joinGameRequest.username()
+            );
             gameDataMap.put(newGameData.gameId(), newGameData);
             return newGameData;
         }
@@ -75,7 +77,10 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
 
     @Override
     public GameData createGame(GameData gameData) {
-        GameData newGameData = new GameData(gameDataMap.size() + 1, gameData.blackUsername(), gameData.whiteUsername(), gameData.gameName(), gameData.game());
+        GameData newGameData = new GameData(gameDataMap.size() + 1,
+                gameData.blackUsername(), gameData.whiteUsername(),
+                gameData.gameName(), gameData.game()
+        );
         gameDataMap.put(gameDataMap.size()+1, newGameData);
         return newGameData;
     }

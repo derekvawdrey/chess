@@ -19,7 +19,8 @@ public abstract class PieceMovesCalculator {
      * @param ignoreColor
      * @return a collection of chess moves
      */
-    public Collection<ChessMove> calculatePieceMoves(ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor){
+    public Collection<ChessMove> calculatePieceMoves(
+            ChessBoard board, ChessPosition position, ChessPiece piece, boolean ignoreColor){
         return null;
     }
 
@@ -35,13 +36,15 @@ public abstract class PieceMovesCalculator {
     }
 
     /**
-     * Returns a collection of possible moves including moves to pieces of the same color
+     * Returns a collection of possible
+     * moves including moves to pieces of the same color
      * @param board
      * @param position
      * @param piece
      * @return a collection of chess moves
      */
-    public Collection<ChessMove> pieceMovesIgnoreColor(ChessBoard board, ChessPosition position, ChessPiece piece) {
+    public Collection<ChessMove> pieceMovesIgnoreColor(
+            ChessBoard board, ChessPosition position, ChessPiece piece) {
         return calculatePieceMoves(board, position, piece, true);
     }
 
@@ -52,7 +55,8 @@ public abstract class PieceMovesCalculator {
      * @param piece
      * @return A collection of chess positions that the piece covers
      */
-    public Collection<ChessPosition> pieceCoverage(ChessBoard board, ChessPosition position, ChessPiece piece) {
+    public Collection<ChessPosition> pieceCoverage(
+            ChessBoard board, ChessPosition position, ChessPiece piece) {
         Collection<ChessMove> moves = pieceMovesIgnoreColor(board, position, piece);
         Collection<ChessPosition> coverage = new ArrayList<>();
         for (ChessMove move : moves) {
@@ -61,7 +65,10 @@ public abstract class PieceMovesCalculator {
         return coverage;
     }
 
-    public Collection<ChessMove> getChessMoves(ChessBoard board, ChessPosition position, boolean ignoreColor, List<ChessMove> moves, List<ChessPosition> positions) {
+    public Collection<ChessMove> getChessMoves(
+            ChessBoard board, ChessPosition position, boolean ignoreColor,
+            List<ChessMove> moves, List<ChessPosition> positions
+    ) {
         positions.forEach(newPosition -> {
             if((newPosition.getColumn() > 0 && newPosition.getColumn() < 9) && (newPosition.getRow() > 0 && newPosition.getRow() < 9)) {
                 if(board.hasPiece(newPosition) && !board.isPieceSameColor(newPosition,position)){

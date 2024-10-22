@@ -47,7 +47,8 @@ public class SessionService extends BaseService {
      * @throws DataAccessException
      */
     public AuthData getAuthData(String authToken) throws DataAccessException {
-        SessionDataAccessInterface sessionDataAccess = this.dataAccessManager.getDataAccess(SessionDataAccessInterface.class);
+        SessionDataAccessInterface sessionDataAccess =
+                this.dataAccessManager.getDataAccess(SessionDataAccessInterface.class);
         return sessionDataAccess.getAuth(authToken);
     }
 
@@ -56,9 +57,9 @@ public class SessionService extends BaseService {
      * @param authToken
      * @throws DataAccessException
      */
-    public void logout(String authToken) throws DataAccessException {
+    public AuthData logout(String authToken) throws DataAccessException {
         SessionDataAccessInterface sessionDataAccess = this.dataAccessManager.getDataAccess(SessionDataAccessInterface.class);
-        sessionDataAccess.removeAuth(authToken);
+        return sessionDataAccess.removeAuth(authToken);
     }
 
     /**

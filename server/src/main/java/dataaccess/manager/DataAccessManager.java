@@ -23,12 +23,17 @@ public class DataAccessManager {
         this.generateDataAccessInstances();
     }
 
-    private void generateDataAccessInstances(){
+    /**
+     * Create the data access instances necessary
+     * @throws DataAccessException
+     */
+    private void generateDataAccessInstances() {
         if(dataAccessType == DataAccessType.MEMORY_DATA_ACCESS){
             dataAccessMap.put(SessionDataAccessInterface.class, new SessionMemoryDataAccess());
             dataAccessMap.put(GameDataAccessInterface.class, new GameMemoryDataAccess());
             dataAccessMap.put(UserDataAccessInterface.class, new UserMemoryDataAccess());
         }else{
+
             // Put in the sql ones :)
         }
     }

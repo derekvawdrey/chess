@@ -36,9 +36,4 @@ public class SessionMemoryDataAccess implements SessionDataAccessInterface {
     public void removeAllAuth() throws DataAccessException {
         authDataMap.clear();
     }
-
-    @Override
-    public boolean initalizeDatabaseTables() {
-        return false;
-    }
 }

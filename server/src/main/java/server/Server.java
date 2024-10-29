@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import dataaccess.DataAccessException;
 import dataaccess.manager.DataAccessManager;
 import dataaccess.DataAccessType;
+import dataaccess.manager.DatabaseManager;
 import handlers.*;
 import service.manager.ServiceManager;
 import spark.Response;
@@ -25,7 +26,6 @@ public class Server {
         this.handlers = new ArrayList<>();
         this.dataAccessManager = new DataAccessManager(DataAccessType.MEMORY_DATA_ACCESS);
         this.serviceManager = new ServiceManager(dataAccessManager);
-
         this.createHandlers();
     }
 

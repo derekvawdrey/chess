@@ -89,4 +89,9 @@ public class GameMemoryDataAccess implements GameDataAccessInterface {
     public void deleteAllGames() {
         gameDataMap.clear();
     }
+
+    @Override
+    public boolean initalizeDatabaseTables() {
+        return false;
+    }
 }

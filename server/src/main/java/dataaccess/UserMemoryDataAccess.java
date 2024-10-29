@@ -31,4 +31,9 @@ public class UserMemoryDataAccess implements UserDataAccessInterface {
     public void deleteAllUsers() throws DataAccessException {
         users.clear();
     }
+
+    @Override
+    public boolean initalizeDatabaseTables() {
+        return false;
+    }
 }

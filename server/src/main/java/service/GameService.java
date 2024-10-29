@@ -27,6 +27,12 @@ public class GameService extends BaseService {
         return gameDataAccess.getAllGames();
     }
 
+    /**
+     *
+     * @param joinGameRequest a JoinGameRequest object
+     * @return a GameData object
+     * @throws DataAccessException
+     */
     public GameData joinGame(JoinGameRequest joinGameRequest) throws DataAccessException {
         GameDataAccessInterface gameDataAccess = this.dataAccessManager.getDataAccess(GameDataAccessInterface.class);
         return gameDataAccess.joinGame(joinGameRequest);

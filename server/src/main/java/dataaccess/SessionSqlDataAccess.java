@@ -49,9 +49,20 @@ public class SessionSqlDataAccess extends BaseSqlDataAccess implements SessionDa
 
     @Override
     public AuthData getAuth(String authToken) throws DataAccessException {
-        String sql = "SELECT * sessions WHERE authToken = ?";
-        this.executeSqlUpdate(sql, authToken);
-        // THen ret
+        String sql = "SELECT username FROM sessions WHERE authToken = ?";
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var preparedStatement = conn.prepareStatement(sql)) {
+                preparedStatement.setString(1, authToken);
+                try (var resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        String username = resultSet.getString("username");
+                        return new AuthData(username, authToken);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
         return null;
     }
 

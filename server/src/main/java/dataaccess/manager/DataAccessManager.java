@@ -33,8 +33,9 @@ public class DataAccessManager {
             dataAccessMap.put(GameDataAccessInterface.class, new GameMemoryDataAccess());
             dataAccessMap.put(UserDataAccessInterface.class, new UserMemoryDataAccess());
         }else{
-
-            // Put in the sql ones :)
+            dataAccessMap.put(SessionDataAccessInterface.class, new SessionSqlDataAccess());
+            dataAccessMap.put(GameDataAccessInterface.class, new GameSqlDataAccess());
+            dataAccessMap.put(UserDataAccessInterface.class, new UserSqlDataAccess());
         }
     }
 

@@ -1,7 +1,7 @@
 package dataaccess.interfaces;
 
 public abstract class BaseSqlDataAccess {
-    BaseSqlDataAccess(){
+    protected BaseSqlDataAccess(){
         initalizeDatabaseTables();
     }
 

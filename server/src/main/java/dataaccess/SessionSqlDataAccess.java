@@ -3,20 +3,25 @@ package dataaccess;
 import dataaccess.interfaces.BaseSqlDataAccess;
 import dataaccess.interfaces.GameDataAccessInterface;
 import dataaccess.interfaces.SessionDataAccessInterface;
+import dataaccess.manager.DatabaseManager;
 import model.AuthData;
 import model.GameData;
 import model.GameListResult;
 import model.JoinGameRequest;
 
+import java.sql.SQLException;
+
 public class SessionSqlDataAccess extends BaseSqlDataAccess implements SessionDataAccessInterface {
-    public SessionSqlDataAccess(){
+    public SessionSqlDataAccess() throws DataAccessException{
         super();
 
     }
 
     @Override
-    protected boolean initalizeDatabaseTables(){
-        return false;
+    protected void initalizeDatabaseTables() throws DataAccessException{
+        String sql = "";
+
+        this.executeSql(sql);
     }
 
     @Override

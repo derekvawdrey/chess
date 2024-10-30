@@ -17,9 +17,10 @@ public class DataAccessManager {
      *
      * @param dataAccessType The type of DataAccess's to create and populate
      */
-    public DataAccessManager(DataAccessType dataAccessType) {
+    public DataAccessManager(DataAccessType dataAccessType) throws DataAccessException {
         this.dataAccessType = dataAccessType;
         this.dataAccessMap = new ConcurrentHashMap<>();
+        DatabaseManager.createDatabase();
         this.generateDataAccessInstances();
     }
 
@@ -27,7 +28,7 @@ public class DataAccessManager {
      * Create the data access instances necessary
      * @throws DataAccessException
      */
-    private void generateDataAccessInstances() {
+    private void generateDataAccessInstances() throws DataAccessException {
         if(dataAccessType == DataAccessType.MEMORY_DATA_ACCESS){
             dataAccessMap.put(SessionDataAccessInterface.class, new SessionMemoryDataAccess());
             dataAccessMap.put(GameDataAccessInterface.class, new GameMemoryDataAccess());

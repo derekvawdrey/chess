@@ -7,14 +7,16 @@ import model.AuthData;
 import model.UserData;
 
 public class UserSqlDataAccess extends BaseSqlDataAccess implements UserDataAccessInterface {
-    public UserSqlDataAccess(){
+    public UserSqlDataAccess() throws DataAccessException{
         super();
 
     }
 
     @Override
-    protected boolean initalizeDatabaseTables(){
-        return false;
+    protected void initalizeDatabaseTables() throws DataAccessException{
+        String sql = "";
+
+        this.executeSql(sql);
     }
 
     @Override

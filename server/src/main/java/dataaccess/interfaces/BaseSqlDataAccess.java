@@ -48,7 +48,7 @@ public abstract class BaseSqlDataAccess {
                     if (generatedKeys.next()) {
                         return generatedKeys.getInt(1);
                     } else {
-                        throw new DataAccessException("No ID returned, statement may not have generated a key.");
+                        throw new DataAccessException("womp womp");
                     }
                 }
             }

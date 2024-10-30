@@ -36,7 +36,7 @@ public class UserSqlDataAccess extends BaseSqlDataAccess implements UserDataAcce
                     if (resultSet.next()) {
                         String email = resultSet.getString("email");
                         String password = resultSet.getString("password");
-                        return new UserData(username, email, password);
+                        return new UserData(username, password, email);
                     }
                 }
             }

@@ -7,8 +7,8 @@ import model.JoinGameRequest;
 
 public interface GameDataAccessInterface extends BaseDataAccessInterface {
 
-    GameListResult getAllGames();
-    GameData getGame(int gameId);
+    GameListResult getAllGames() throws DataAccessException;
+    GameData getGame(int gameId) throws DataAccessException;
     GameData joinGame(JoinGameRequest joinGameRequest);
     GameData createGame(GameData gameData) throws DataAccessException;
     void deleteAllGames() throws DataAccessException;

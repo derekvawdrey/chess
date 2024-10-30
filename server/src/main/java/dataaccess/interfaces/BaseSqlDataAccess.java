@@ -22,6 +22,8 @@ public abstract class BaseSqlDataAccess {
                         preparedStatement.setString(i + 1, (String) params[i]);
                     } else if (params[i] instanceof Integer) {
                         preparedStatement.setInt(i + 1, (Integer) params[i]);
+                    } else if (params[i] == null) {
+                        preparedStatement.setNull(i+1, java.sql.Types.VARCHAR);
                     }
                 }
                 preparedStatement.executeUpdate();

@@ -11,6 +11,8 @@ import dataaccess.interfaces.GameDataAccessInterface;
 import dataaccess.manager.DatabaseManager;
 import model.*;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,13 +110,13 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
     @Override
     public GameData createGame(GameData gameData) throws DataAccessException {
         String sql = "INSERT INTO games (name, white_username, black_username, game) VALUES(?,?,?,?)";
-        this.executeSqlUpdate(sql,
+        int gameId = this.executeSqlUpdateGetId(sql,
                 gameData.gameName(),
                 null,
                 null,
                 new Gson().toJson(gameData.game(), ChessGame.class)
         );
-        return gameData;
+        return getGame(gameId);
     }
 
     @Override

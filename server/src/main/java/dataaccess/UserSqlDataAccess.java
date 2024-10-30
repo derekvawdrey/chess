@@ -30,11 +30,14 @@ public class UserSqlDataAccess extends BaseSqlDataAccess implements UserDataAcce
 
     @Override
     public UserData insertUser(UserData user) throws DataAccessException {
-        return null;
+        String sql = "INSERT INTO userData (username, email, password) VALUES (?,?,?)";
+        this.executeSqlUpdate(sql, user.username(), user.email(), user.password());
+        return user;
     }
 
     @Override
     public void deleteAllUsers() throws DataAccessException {
-
+        String sql = "TRUNCATE userData";
+        this.executeSqlUpdate(sql);
     }
 }

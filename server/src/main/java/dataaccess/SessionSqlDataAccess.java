@@ -22,7 +22,7 @@ public class SessionSqlDataAccess extends BaseSqlDataAccess implements SessionDa
         String sql = "CREATE TABLE IF NOT EXISTS sessions (";
         sql += "id INTEGER PRIMARY KEY AUTO_INCREMENT,";
         sql += "username VARCHAR(255) NOT NULL,";
-        sql += "authToken VARCHAR(255) NOT NULL)";
+        sql += "authToken VARCHAR(255) NOT NULL UNIQUE)";
 
         this.executeSqlUpdate(sql);
     }
@@ -30,8 +30,11 @@ public class SessionSqlDataAccess extends BaseSqlDataAccess implements SessionDa
     @Override
     public AuthData insertAuth(AuthData authData) throws DataAccessException {
         String sql = "INSERT INTO sessions VALUES(?,?)";
-
-        this.executeSqlUpdate(sql, authData.username(), authData.authToken());
+        try {
+            this.executeSqlUpdate(sql, authData.username(), authData.authToken());
+        } catch (DataAccessException e) {
+            return null;
+        }
         return authData;
     }
 

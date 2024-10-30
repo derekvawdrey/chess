@@ -42,12 +42,20 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
     }
 
     @Override
-    public GameData createGame(GameData gameData) {
-        return null;
+    public GameData createGame(GameData gameData) throws DataAccessException {
+        String sql = "INSERT INTO games(?,?,?,?)";
+        this.executeSqlUpdate(sql,
+                gameData.gameName(),
+                gameData.blackUsername(),
+                gameData.whiteUsername(),
+                gameData.game()
+        );
+        return gameData;
     }
 
     @Override
-    public void deleteAllGames() {
-
+    public void deleteAllGames() throws DataAccessException {
+        String sql = "TRUNCATE games";
+        this.executeSqlUpdate(sql);
     }
 }

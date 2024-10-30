@@ -20,7 +20,7 @@ public class UserSqlDataAccess extends BaseSqlDataAccess implements UserDataAcce
         sql += "email VARCHAR(255) NOT NULL,";
         sql += "password VARCHAR(255) NOT NULL)";
 
-        this.executeSql(sql);
+        this.executeSqlUpdate(sql);
     }
 
     @Override

@@ -23,7 +23,7 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
         sql += "black_username VARCHAR(255) DEFAULT NULL,";
         sql += "game TEXT DEFAULT NULL)";
 
-        this.executeSql(sql);
+        this.executeSqlUpdate(sql);
     }
 
     @Override

@@ -19,7 +19,10 @@ public class SessionSqlDataAccess extends BaseSqlDataAccess implements SessionDa
 
     @Override
     protected void initalizeDatabaseTables() throws DataAccessException{
-        String sql = "";
+        String sql = "CREATE TABLE IF NOT EXISTS sessions (";
+        sql += "id INTEGER PRIMARY KEY AUTO_INCREMENT,";
+        sql += "username VARCHAR(255) NOT NULL,";
+        sql += "authToken VARCHAR(255) NOT NULL)";
 
         this.executeSql(sql);
     }

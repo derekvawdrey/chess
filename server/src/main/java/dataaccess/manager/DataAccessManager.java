@@ -20,7 +20,6 @@ public class DataAccessManager {
     public DataAccessManager(DataAccessType dataAccessType) throws DataAccessException {
         this.dataAccessType = dataAccessType;
         this.dataAccessMap = new ConcurrentHashMap<>();
-        DatabaseManager.createDatabase();
         this.generateDataAccessInstances();
     }
 
@@ -34,6 +33,7 @@ public class DataAccessManager {
             dataAccessMap.put(GameDataAccessInterface.class, new GameMemoryDataAccess());
             dataAccessMap.put(UserDataAccessInterface.class, new UserMemoryDataAccess());
         }else{
+            DatabaseManager.createDatabase();
             dataAccessMap.put(SessionDataAccessInterface.class, new SessionSqlDataAccess());
             dataAccessMap.put(GameDataAccessInterface.class, new GameSqlDataAccess());
             dataAccessMap.put(UserDataAccessInterface.class, new UserSqlDataAccess());

@@ -24,7 +24,11 @@ public class Server {
 
     public Server() {
         this.handlers = new ArrayList<>();
-        this.dataAccessManager = new DataAccessManager(DataAccessType.MEMORY_DATA_ACCESS);
+        try {
+            this.dataAccessManager = new DataAccessManager(DataAccessType.DATABASE);
+        } catch (DataAccessException e) {
+            throw new RuntimeException(e);
+        }
         this.serviceManager = new ServiceManager(dataAccessManager);
         this.createHandlers();
     }

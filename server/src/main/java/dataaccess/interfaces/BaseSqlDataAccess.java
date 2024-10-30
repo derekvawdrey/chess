@@ -18,7 +18,7 @@ public abstract class BaseSqlDataAccess {
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException ex) {
-            throw new DataAccessException("could not create table for games");
+            throw new DataAccessException("could not create table");
         }
     }
 }

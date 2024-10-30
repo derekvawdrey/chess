@@ -14,7 +14,11 @@ public class UserSqlDataAccess extends BaseSqlDataAccess implements UserDataAcce
 
     @Override
     protected void initalizeDatabaseTables() throws DataAccessException{
-        String sql = "";
+        String sql = "CREATE TABLE IF NOT EXISTS userData (";
+        sql += "id INTEGER PRIMARY KEY AUTO_INCREMENT,";
+        sql += "username VARCHAR(255) NOT NULL UNIQUE,";
+        sql += "email VARCHAR(255) NOT NULL,";
+        sql += "password VARCHAR(255) NOT NULL)";
 
         this.executeSql(sql);
     }

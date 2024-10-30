@@ -17,12 +17,11 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
     @Override
     protected void initalizeDatabaseTables() throws DataAccessException{
         String sql = "CREATE TABLE IF NOT EXISTS games (";
-        sql += "id INTEGER PRIMARY KEY AUTOINCREMENT,";
+        sql += "id INTEGER PRIMARY KEY AUTO_INCREMENT,";
         sql += "name VARCHAR(255) NOT NULL,";
         sql += "white_username VARCHAR(255) DEFAULT NULL,";
         sql += "black_username VARCHAR(255) DEFAULT NULL,";
-        sql += "game TEXT DEFAULT NULL,";
-        sql += "PRIMARY KEY (id))";
+        sql += "game TEXT DEFAULT NULL)";
 
         this.executeSql(sql);
     }

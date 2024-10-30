@@ -8,4 +8,8 @@ public abstract class BaseSqlDataAccess {
     protected boolean initalizeDatabaseTables(){
         return false;
     }
+
+    protected void executeSql(String statement){
+
+    }
 }

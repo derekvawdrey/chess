@@ -1,10 +1,8 @@
 package dataaccess;
 
 import dataaccess.interfaces.BaseSqlDataAccess;
-import dataaccess.interfaces.SessionDataAccessInterface;
 import dataaccess.interfaces.UserDataAccessInterface;
 import dataaccess.manager.DatabaseManager;
-import model.AuthData;
 import model.UserData;
 
 import java.sql.SQLException;

@@ -1,13 +1,9 @@
 package dataaccess;
 
 import dataaccess.interfaces.BaseSqlDataAccess;
-import dataaccess.interfaces.GameDataAccessInterface;
 import dataaccess.interfaces.SessionDataAccessInterface;
 import dataaccess.manager.DatabaseManager;
 import model.AuthData;
-import model.GameData;
-import model.GameListResult;
-import model.JoinGameRequest;
 
 import java.sql.SQLException;
 

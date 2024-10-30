@@ -1,22 +1,14 @@
 package dataaccess;
 
 import chess.ChessGame;
-import chess.ChessPiece;
-import chess.moves.*;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonDeserializer;
 import dataaccess.interfaces.BaseSqlDataAccess;
 import dataaccess.interfaces.GameDataAccessInterface;
 import dataaccess.manager.DatabaseManager;
 import model.*;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAccessInterface {
     public GameSqlDataAccess() throws DataAccessException {

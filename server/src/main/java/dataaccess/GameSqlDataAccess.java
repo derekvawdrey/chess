@@ -43,7 +43,7 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
 
     @Override
     public GameData createGame(GameData gameData) throws DataAccessException {
-        String sql = "INSERT INTO games(?,?,?,?)";
+        String sql = "INSERT INTO games (name, white_username, black_username, game) VALUES(?,?,?,?)";
         this.executeSqlUpdate(sql,
                 gameData.gameName(),
                 gameData.blackUsername(),

@@ -97,7 +97,7 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
                 if (affectedRows > 0) {
                     return getGame(joinGameRequest.gameID());
                 } else {
-                    throw new DataAccessException("Could not join game.");
+                    return null;
                 }
             }
         } catch (SQLException e) {

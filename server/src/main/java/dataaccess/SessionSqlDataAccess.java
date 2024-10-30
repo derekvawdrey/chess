@@ -56,7 +56,7 @@ public class SessionSqlDataAccess extends BaseSqlDataAccess implements SessionDa
                 try (var resultSet = preparedStatement.executeQuery()) {
                     if (resultSet.next()) {
                         String username = resultSet.getString("username");
-                        return new AuthData(username, authToken);
+                        return new AuthData(authToken, username);
                     }
                 }
             }

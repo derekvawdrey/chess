@@ -1,7 +1,11 @@
 package dataaccess;
 
 import chess.ChessGame;
+import chess.ChessPiece;
+import chess.moves.*;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonDeserializer;
 import dataaccess.interfaces.BaseSqlDataAccess;
 import dataaccess.interfaces.GameDataAccessInterface;
 import dataaccess.manager.DatabaseManager;
@@ -10,6 +14,7 @@ import model.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAccessInterface {
     public GameSqlDataAccess() throws DataAccessException {
@@ -41,7 +46,7 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
                         String name = resultSet.getString("name");
                         String whiteUsername = resultSet.getString("white_username");
                         String blackUsername = resultSet.getString("black_username");
-                        games.add(new GameDataResponse(id, name, whiteUsername, blackUsername));
+                        games.add(new GameDataResponse(id, whiteUsername, blackUsername, name));
                     }
                 }
             }
@@ -64,7 +69,7 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
                         String white_username = resultSet.getString("white_username");
                         String black_username = resultSet.getString("black_username");
                         ChessGame game = this.deserializeGameData(resultSet.getString("game"));
-                        return new GameData(id,name,white_username,black_username,game);
+                        return new GameData(id,white_username,black_username,name,game);
                     }
                 }
             }
@@ -75,8 +80,29 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
     }
 
     @Override
-    public GameData joinGame(JoinGameRequest joinGameRequest) {
-        return null;
+    public GameData joinGame(JoinGameRequest joinGameRequest) throws DataAccessException {
+        String sql;
+        if (joinGameRequest.playerColor().equals("WHITE")) {
+            sql = "UPDATE games SET white_username = ? WHERE id = ? AND white_username IS NULL";
+        } else {
+            sql = "UPDATE games SET black_username = ? WHERE id = ? AND black_username IS NULL";
+        }
+
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var preparedStatement = conn.prepareStatement(sql)) {
+                preparedStatement.setString(1, joinGameRequest.username());
+                preparedStatement.setInt(2, joinGameRequest.gameID());
+
+                int affectedRows = preparedStatement.executeUpdate();
+                if (affectedRows > 0) {
+                    return getGame(joinGameRequest.gameID());
+                } else {
+                    throw new DataAccessException("Could not join game.");
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException("Error joining game: " + e.getMessage());
+        }
     }
 
     @Override
@@ -96,6 +122,7 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
         String sql = "TRUNCATE games";
         this.executeSqlUpdate(sql);
     }
+
 
     private ChessGame deserializeGameData(String json){
         Gson gson = new Gson();

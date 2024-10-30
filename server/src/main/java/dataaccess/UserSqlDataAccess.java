@@ -3,8 +3,11 @@ package dataaccess;
 import dataaccess.interfaces.BaseSqlDataAccess;
 import dataaccess.interfaces.SessionDataAccessInterface;
 import dataaccess.interfaces.UserDataAccessInterface;
+import dataaccess.manager.DatabaseManager;
 import model.AuthData;
 import model.UserData;
+
+import java.sql.SQLException;
 
 public class UserSqlDataAccess extends BaseSqlDataAccess implements UserDataAccessInterface {
     public UserSqlDataAccess() throws DataAccessException{
@@ -25,6 +28,21 @@ public class UserSqlDataAccess extends BaseSqlDataAccess implements UserDataAcce
 
     @Override
     public UserData getUser(String username) throws DataAccessException {
+        String sql = "SELECT email, password FROM userData WHERE username = ?";
+        try (var conn = DatabaseManager.getConnection()) {
+            try (var preparedStatement = conn.prepareStatement(sql)) {
+                preparedStatement.setString(1, username);
+                try (var resultSet = preparedStatement.executeQuery()) {
+                    if (resultSet.next()) {
+                        String email = resultSet.getString("email");
+                        String password = resultSet.getString("password");
+                        return new UserData(username, email, password);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new DataAccessException(e.getMessage());
+        }
         return null;
     }
 

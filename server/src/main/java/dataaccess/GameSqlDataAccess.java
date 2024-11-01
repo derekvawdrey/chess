@@ -104,8 +104,8 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
         String sql = "INSERT INTO games (name, white_username, black_username, game) VALUES(?,?,?,?)";
         int gameId = this.executeSqlUpdateGetId(sql,
                 gameData.gameName(),
-                null,
-                null,
+                gameData.whiteUsername() == null ? null : gameData.whiteUsername(),
+                gameData.blackUsername() == null ? null : gameData.blackUsername(),
                 new Gson().toJson(gameData.game(), ChessGame.class)
         );
         return getGame(gameId);

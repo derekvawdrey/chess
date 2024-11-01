@@ -30,7 +30,12 @@ public class GameDataAccessTests{
     @Test
     @DisplayName("Get All Games - Positive")
     public void testGetAllGamesPositive() throws DataAccessException {
-        gameDataAccess.createGame(new GameData(1, null, null, "TestGame", new ChessGame()));
+        gameDataAccess.createGame(
+                new GameData(1,
+                        null,
+                        null,
+                        "TestGame",
+                        new ChessGame()));
         GameListResult games = gameDataAccess.getAllGames();
         Assertions.assertFalse(games.getGames().isEmpty(), "Game list should not be empty");
     }
@@ -45,7 +50,15 @@ public class GameDataAccessTests{
     @Test
     @DisplayName("Get Game by ID - Positive")
     public void testGetGamePositive() throws DataAccessException {
-        GameData createdGame = gameDataAccess.createGame(new GameData(1, null, null, "Game1", new ChessGame()));
+        GameData createdGame = gameDataAccess.createGame(
+            new GameData(
+                1,
+                null,
+                null,
+                "Game1",
+                new ChessGame()
+            )
+        );
         GameData fetchedGame = gameDataAccess.getGame(createdGame.gameId());
         Assertions.assertNotNull(fetchedGame, "Fetched game should not be null");
     }
@@ -60,7 +73,15 @@ public class GameDataAccessTests{
     @Test
     @DisplayName("Join Game - Positive")
     public void testJoinGamePositive() throws DataAccessException {
-        GameData createdGame = gameDataAccess.createGame(new GameData(1, null, null, "JoinableGame", new ChessGame()));
+        GameData createdGame = gameDataAccess.createGame(
+                new GameData(
+                        1,
+                        null,
+                        null,
+                        "Game1",
+                        new ChessGame()
+                )
+        );
         JoinGameRequest request = new JoinGameRequest("WHITE", "Player1", createdGame.gameId());
         GameData updatedGame = gameDataAccess.joinGame(request);
         Assertions.assertNotNull(updatedGame, "Game should be joined successfully");
@@ -70,7 +91,15 @@ public class GameDataAccessTests{
     @Test
     @DisplayName("Join Game - Negative")
     public void testJoinGameNegative() throws DataAccessException {
-        GameData createdGame = gameDataAccess.createGame(new GameData(1, "WhitePlayer", "BlackPlayer", "FullGame", new ChessGame()));
+        GameData createdGame = gameDataAccess.createGame(
+                new GameData(
+                        1,
+                        "WhitePlayer",
+                        "BlackPlayer",
+                        "Game1",
+                        new ChessGame()
+                )
+        );
         JoinGameRequest request = new JoinGameRequest("WHITE", "AnotherPlayer", createdGame.gameId());
         GameData updatedGame = gameDataAccess.joinGame(request);
         Assertions.assertNull(updatedGame, "Game should not be joined if the spot is already taken");
@@ -79,7 +108,15 @@ public class GameDataAccessTests{
     @Test
     @DisplayName("Create Game - Positive")
     public void testCreateGamePositive() throws DataAccessException {
-        GameData createdGame = gameDataAccess.createGame(new GameData(1, null, null, "NewGame", new ChessGame()));
+        GameData createdGame = gameDataAccess.createGame(
+                new GameData(
+                        1,
+                        null,
+                        null,
+                        "NewGame",
+                        new ChessGame()
+                )
+        );
         Assertions.assertNotNull(createdGame, "Created game should not be null");
         Assertions.assertEquals("NewGame", createdGame.gameName(), "Game name should match");
     }
@@ -94,7 +131,15 @@ public class GameDataAccessTests{
     @Test
     @DisplayName("Delete All Games")
     public void testDeleteAllGamesPositive() throws DataAccessException {
-        gameDataAccess.createGame(new GameData(1, null, null, "GameToDelete", new ChessGame()));
+        GameData createdGame = gameDataAccess.createGame(
+                new GameData(
+                        1,
+                        null,
+                        null,
+                        "Game1",
+                        new ChessGame()
+                )
+        );
         gameDataAccess.deleteAllGames();
         GameListResult games = gameDataAccess.getAllGames();
         Assertions.assertTrue(games.getGames().isEmpty(), "Game list should be empty after deletion");

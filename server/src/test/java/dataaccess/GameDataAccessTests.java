@@ -125,7 +125,10 @@ public class GameDataAccessTests{
     @DisplayName("Create Game - Negative")
     public void testCreateGameNegative() {
         GameData gameData = null;
-        Assertions.assertThrows(NullPointerException.class, () -> gameDataAccess.createGame(gameData), "Should throw an exception when game data is null");
+        Assertions.assertThrows(NullPointerException.class, () ->
+                gameDataAccess.createGame(gameData),
+                "Should throw an exception when game data is null"
+        );
     }
 
     @Test

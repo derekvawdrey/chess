@@ -60,10 +60,10 @@ public class GameSqlDataAccess extends BaseSqlDataAccess implements GameDataAcce
                     if (resultSet.next()) {
                         int id = resultSet.getInt("id");
                         String name = resultSet.getString("name");
-                        String white_username = resultSet.getString("white_username");
-                        String black_username = resultSet.getString("black_username");
+                        String whiteUsername = resultSet.getString("white_username");
+                        String blackUsername = resultSet.getString("black_username");
                         ChessGame game = this.deserializeGameData(resultSet.getString("game"));
-                        return new GameData(id,white_username,black_username,name,game);
+                        return new GameData(id,whiteUsername,blackUsername,name,game);
                     }
                 }
             }

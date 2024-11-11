@@ -19,6 +19,7 @@ public class LogoutCommand extends BaseCommand {
 
     @Override
     public void executeCommand(String... args) {
+        // TODO: Send logout to server facade
         this.chessClient.setState(ChessClient.ClientState.PRE_LOGIN);
         this.chessClient.setAuthData(null);
     }

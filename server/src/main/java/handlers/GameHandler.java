@@ -54,7 +54,7 @@ public class GameHandler extends BaseHandler{
 
         GameData game = gameService.joinGame(joinGameRequest);
         if(game == null){
-            throw new ExceptionHandler("already taken", 403);
+            throw new ExceptionHandler("already taken", 409);
         }
 
         this.setSuccessHeaders(res);

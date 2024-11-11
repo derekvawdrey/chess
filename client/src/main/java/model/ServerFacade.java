@@ -68,6 +68,9 @@ public class ServerFacade {
 
             return this.readBody(http, responseType);
         } catch (Exception e) {
+            if(e instanceof ResponseException) {
+                throw new ResponseException(((ResponseException) e).getStatusCode(), e.getMessage());
+            }
             throw new ResponseException(500, e.getMessage());
         }
     }

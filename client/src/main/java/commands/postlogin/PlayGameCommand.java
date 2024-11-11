@@ -1,6 +1,7 @@
 package commands.postlogin;
 
 import commands.BaseCommand;
+import commands.BaseObserveGameCommand;
 import exception.ResponseException;
 import model.ChessClient;
 import model.GameDataResponse;
@@ -8,9 +9,7 @@ import model.JoinGameRequest;
 
 import java.util.List;
 
-public class PlayGameCommand extends BaseCommand {
-
-    private GameDataResponse selectedGame;
+public class PlayGameCommand extends BaseObserveGameCommand {
 
     public PlayGameCommand(ChessClient chessClient) {
         super(
@@ -22,31 +21,13 @@ public class PlayGameCommand extends BaseCommand {
 
     @Override
     public boolean validateArgs(String... args) {
-        selectedGame = null;
         if (args.length != 2) {
             this.chessClient.printError("Invalid number of arguments!");
             return false;
         }
 
-        ListGamesCommand listGamesCommand = (ListGamesCommand) this.chessClient.getPostLoginCommands().get("list");
-
-        if (listGamesCommand != null) {
-            List<GameDataResponse> gamesArray = listGamesCommand.getGamesArray();
-            int gameCount = gamesArray.size();
-            int requestedId;
-
-            try {
-                requestedId = Integer.parseInt(args[0]);
-            } catch (NumberFormatException e) {
-                this.chessClient.printError("Invalid ID format.");
-                return false;
-            }
-
-            if (gameCount <= requestedId) {
-                this.chessClient.printError("Invalid ID.");
-                return false;
-            }
-            selectedGame = gamesArray.get(requestedId);
+        if(!this.checkGameId(args[0])){
+            return false;
         }
 
         if(!args[1].equalsIgnoreCase("WHITE") && !args[1].equalsIgnoreCase("BLACK")){
@@ -69,10 +50,10 @@ public class PlayGameCommand extends BaseCommand {
                     this.chessClient.getAuthData().authToken()
             );
         }catch (ResponseException e){
-            if(e.StatusCode() == 403){
+            if(e.getStatusCode() == 409){
                 this.chessClient.printError("There is already a player for that color!");
             }else{
-                this.chessClient.printError("An unexpected error occured.");
+                this.chessClient.printError("An unexpected error occurred.");
             }
         }
     }

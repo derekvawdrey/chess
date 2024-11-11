@@ -1,10 +1,9 @@
 package commands.postlogin;
 
 import commands.BaseCommand;
-import model.ChessClient;
 
 public class CreateGameCommand extends BaseCommand {
-    public CreateGameCommand(ChessClient chessClient) {
+    public CreateGameCommand(model.ChessClient chessClient) {
         super(
                 chessClient,
                 "Creates a game with a specified name.",

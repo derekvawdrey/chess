@@ -1,16 +1,16 @@
 package commands.postlogin;
 
 import commands.BaseCommand;
-import model.ChessClient;
+import commands.BaseObserveGameCommand;
 import model.GameDataResponse;
 
 import java.util.List;
 
-public class ObserveGameCommand extends BaseCommand {
+public class ObserveGameCommand extends BaseObserveGameCommand {
 
-    private GameDataResponse gameData;
 
-    public ObserveGameCommand(ChessClient chessClient) {
+
+    public ObserveGameCommand(model.ChessClient chessClient) {
         super(
                 chessClient,
                 "Watch a game",
@@ -25,27 +25,7 @@ public class ObserveGameCommand extends BaseCommand {
             return false;
         }
 
-        ListGamesCommand listGamesCommand = (ListGamesCommand) this.chessClient.getPostLoginCommands().get("list");
-
-        if (listGamesCommand != null) {
-            List<GameDataResponse> gamesArray = listGamesCommand.getGamesArray();
-            int gameCount = gamesArray.size();
-            int requestedId;
-
-            try {
-                requestedId = Integer.parseInt(args[0]);
-            } catch (NumberFormatException e) {
-                this.chessClient.printError("Invalid ID format.");
-                return false;
-            }
-
-            if (gameCount <= requestedId) {
-                this.chessClient.printError("Invalid ID.");
-                return false;
-            }
-        }
-
-        return true;
+        return this.checkGameId(args[0]);
     }
 
     @Override

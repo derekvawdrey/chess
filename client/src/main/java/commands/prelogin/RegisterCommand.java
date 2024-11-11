@@ -4,7 +4,6 @@ import commands.BaseCommand;
 import exception.ResponseException;
 import model.AuthData;
 import model.ChessClient;
-import model.LoginRequest;
 import model.UserData;
 
 public class RegisterCommand extends BaseCommand  {
@@ -49,12 +48,7 @@ public class RegisterCommand extends BaseCommand  {
             }
         }
         catch (ResponseException e) {
-            if(e.StatusCode() != 500){
-                this.chessClient.printError("There was an unexpected error...");
-            }else{
-                this.chessClient.printError(e.getMessage());
-                this.chessClient.printError("That user already exists!");
-            }
+            this.chessClient.printError("That user already exists!");
         }
     }
 }

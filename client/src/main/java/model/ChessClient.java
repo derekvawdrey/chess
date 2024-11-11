@@ -8,8 +8,6 @@ import commands.prelogin.QuitCommand;
 import commands.prelogin.RegisterCommand;
 import ui.EscapeSequences;
 
-import java.util.Dictionary;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -52,7 +50,7 @@ public class ChessClient {
     }
 
     /**
-     * Start the ChessClient scanning process.
+     * Start the model.ChessClient scanning process.
      */
     public void startScan(){
         Scanner scanner = new Scanner(System.in);

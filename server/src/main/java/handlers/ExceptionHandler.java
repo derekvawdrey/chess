@@ -8,6 +8,6 @@ public class ExceptionHandler extends Exception {
     }
 
     public int getStatusCode() {
-        return statusCode;
+        return this.statusCode;
     }
 }

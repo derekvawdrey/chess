@@ -1,4 +1,3 @@
-import chess.*;
 import model.ChessClient;
 
 public class Main {

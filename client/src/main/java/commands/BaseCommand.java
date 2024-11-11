@@ -11,7 +11,7 @@ public abstract class BaseCommand {
         this.commandString = commandString;
         this.numberOfArguments = numberOfArguments;
     }
-    
+
     protected void executeCommand(String[] args){
 
     }

@@ -66,7 +66,6 @@ public class ChessClient {
         }else{
             // TODO: Give an error and print out stuff.
         }
-
     }
 
     /**

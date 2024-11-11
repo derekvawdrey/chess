@@ -2,16 +2,24 @@ package commands.postlogin;
 
 import commands.BaseCommand;
 import model.ChessClient;
+import model.GameDataResponse;
 import model.GameListResult;
 import ui.EscapeSequences;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ListGamesCommand extends BaseCommand {
+
+    private List<GameDataResponse> gamesArray;
+
     public ListGamesCommand(ChessClient chessClient) {
         super(
                 chessClient,
                 "Lists all active games",
                 "list"
         );
+        gamesArray = new ArrayList<>();
     }
 
     @Override
@@ -21,14 +29,13 @@ public class ListGamesCommand extends BaseCommand {
 
     @Override
     public void executeCommand(String... args) {
+        gamesArray.clear();
         try {
             GameListResult list = this.chessClient.getServerFacade().listGames(this.chessClient.getAuthData().authToken());
             list.games().forEach(game -> {
-
-
                 System.out.println(
                     EscapeSequences.SET_TEXT_COLOR_MAGENTA
-                    + "(ID: " + game.gameID() + "): "
+                    + "(ID: " + gamesArray.size() + "): "
                     + EscapeSequences.RESET_TEXT_COLOR
                     + game.gameName()
                     + EscapeSequences.RESET_TEXT_COLOR
@@ -41,10 +48,15 @@ public class ListGamesCommand extends BaseCommand {
                             : EscapeSequences.SET_TEXT_COLOR_GREEN + "____")
                     + EscapeSequences.RESET_TEXT_COLOR
                 );
+                gamesArray.add(game);
             });
         } catch (Exception e) {
             this.chessClient.printError(e.getMessage());
             this.chessClient.printError("An unexpected error occurred.");
         }
+    }
+
+    public List<GameDataResponse> getGamesArray() {
+        return gamesArray;
     }
 }

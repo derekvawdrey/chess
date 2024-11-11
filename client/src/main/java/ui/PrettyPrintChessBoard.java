@@ -14,9 +14,9 @@ public class PrettyPrintChessBoard {
         int end = colorPerspective == ChessGame.TeamColor.BLACK ? 7 : 0;
 
         if(colorPerspective == ChessGame.TeamColor.BLACK){
-            sb.append("   h  g  f  e  d  c  b  a  ");
+            sb.append("   h  g  f  e  d  c  b  a     ");
         }else{
-            sb.append("   a  b  c  d  e  f  g  h  ");
+            sb.append("   a  b  c  d  e  f  g  h     ");
         }
 
         for(int i = start; i != end + increment; i += increment){
@@ -30,8 +30,16 @@ public class PrettyPrintChessBoard {
                 sb.append(getPieceSymbol(board.getPiece(new ChessPosition(i+1,j+1))));
             }
             sb.append(EscapeSequences.RESET_BG_COLOR);
-
+            sb.append(" ");
+            sb.append(i+1).append(" ");
         }
+        sb.append("\n");
+        if(colorPerspective == ChessGame.TeamColor.BLACK){
+            sb.append("   h  g  f  e  d  c  b  a     ");
+        }else{
+            sb.append("   a  b  c  d  e  f  g  h     ");
+        }
+
         sb.append(EscapeSequences.RESET_BG_COLOR);
         sb.append("\n");
 

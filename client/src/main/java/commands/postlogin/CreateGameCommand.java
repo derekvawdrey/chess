@@ -7,8 +7,8 @@ public class CreateGameCommand extends BaseCommand {
     public CreateGameCommand(ChessClient chessClient) {
         super(
                 chessClient,
-                "",
-                ""
+                "Creates a game with a specified name.",
+                "create <NAME>"
         );
     }
 

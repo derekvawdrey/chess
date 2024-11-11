@@ -24,7 +24,7 @@ public class LogoutCommand extends BaseCommand {
             this.chessClient.setState(ChessClient.ClientState.PRE_LOGIN);
             this.chessClient.setAuthData(null);
         } catch (Exception e) {
-            this.chessClient.printError("There was an unexpected error.");
+            this.chessClient.printError(e.getMessage());
         }
 
     }

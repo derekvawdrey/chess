@@ -7,8 +7,8 @@ public class PlayGameCommand extends BaseCommand {
     public PlayGameCommand(ChessClient chessClient) {
         super(
                 chessClient,
-                "",
-                ""
+                "Join a game.",
+                "join <ID> [WHITE|BLACK]"
         );
     }
 

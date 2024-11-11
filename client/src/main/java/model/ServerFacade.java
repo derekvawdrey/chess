@@ -41,7 +41,7 @@ public class ServerFacade {
             http.setDoOutput(true);
 
             if(authToken != null) {
-                http.setRequestProperty("Authorization", "Bearer " + authToken);
+                http.setRequestProperty("Authorization", authToken);
             }
 
             // Write the body

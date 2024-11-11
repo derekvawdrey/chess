@@ -7,14 +7,14 @@ public class ListGamesCommand extends BaseCommand {
     public ListGamesCommand(ChessClient chessClient) {
         super(
                 chessClient,
-                "",
-                ""
+                "Lists all active games",
+                "list"
         );
     }
 
     @Override
     public boolean validateArgs(String... args) {
-        return false;
+        return true;
     }
 
     @Override

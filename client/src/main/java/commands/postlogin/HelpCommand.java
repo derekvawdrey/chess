@@ -18,7 +18,7 @@ public class HelpCommand extends BaseCommand {
 
     @Override
     public boolean validateArgs(String... args) {
-        return false;
+        return true;
     }
 
     @Override

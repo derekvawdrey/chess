@@ -1,10 +1,7 @@
 package model;
 
 import commands.BaseCommand;
-import commands.postlogin.CreateGameCommand;
-import commands.postlogin.ListGamesCommand;
-import commands.postlogin.ObserveGameCommand;
-import commands.postlogin.PlayGameCommand;
+import commands.postlogin.*;
 import commands.prelogin.HelpCommand;
 import commands.prelogin.LoginCommand;
 import commands.prelogin.QuitCommand;
@@ -45,10 +42,10 @@ public class ChessClient {
 
         postLoginCommands.put("help", new commands.postlogin.HelpCommand(this));
         postLoginCommands.put("play", new PlayGameCommand(this));
-        postLoginCommands.put("create", new CreateGameCommand(this));
+        postLoginCommands.put("join", new CreateGameCommand(this));
         postLoginCommands.put("list", new ListGamesCommand(this));
         postLoginCommands.put("observe", new ObserveGameCommand(this));
-        postLoginCommands.put("logout", new QuitCommand(this));
+        postLoginCommands.put("logout", new LogoutCommand(this));
 
 
         this.running = true;
@@ -168,6 +165,14 @@ public class ChessClient {
      */
     public void printError(String error){
         System.out.println(EscapeSequences.SET_TEXT_COLOR_RED + error + EscapeSequences.RESET_TEXT_COLOR);
+    }
+
+    /**
+     * Prints a success message with colors
+     * @param success The success message
+     */
+    public void printSuccess(String success){
+        System.out.println(EscapeSequences.SET_TEXT_COLOR_GREEN + success + EscapeSequences.RESET_TEXT_COLOR);
     }
 
     /**

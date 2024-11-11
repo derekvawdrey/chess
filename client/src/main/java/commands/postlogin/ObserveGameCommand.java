@@ -39,7 +39,7 @@ public class ObserveGameCommand extends BaseCommand {
                 return false;
             }
 
-            if (gameCount >= requestedId) {
+            if (gameCount <= requestedId) {
                 this.chessClient.printError("Invalid ID.");
                 return false;
             }

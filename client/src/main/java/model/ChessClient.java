@@ -42,7 +42,7 @@ public class ChessClient {
 
         postLoginCommands.put("help", new commands.postlogin.HelpCommand(this));
         postLoginCommands.put("play", new PlayGameCommand(this));
-        postLoginCommands.put("join", new CreateGameCommand(this));
+        postLoginCommands.put("create", new CreateGameCommand(this));
         postLoginCommands.put("list", new ListGamesCommand(this));
         postLoginCommands.put("observe", new ObserveGameCommand(this));
         postLoginCommands.put("logout", new LogoutCommand(this));

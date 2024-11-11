@@ -1,6 +1,7 @@
 package model;
 
 import com.google.gson.Gson;
+import exception.ResponseException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,12 +13,14 @@ public class ServerFacade {
     private final String serverRoot;
     private final int port;
     public ServerFacade(int port) {
-        this.serverRoot = "localhost:";
+
         this.port = port;
+        this.serverRoot = "localhost:" + this.port;
     }
 
-    public AuthData register(UserData userData) {
-        return new AuthData(",","");
+    public AuthData register(UserData userData) throws ResponseException {
+        String path = "/register";
+        return this.makeRequest("POST", path, userData, AuthData.class);
     }
 
     public AuthData login(LoginRequest loginRequest) {
@@ -28,7 +31,7 @@ public class ServerFacade {
 
     }
 
-    private <T> T makeRequest(String method, String path, Object request, Class<T> responseType) throws URISyntaxException {
+    private <T> T makeRequest(String method, String path, Object request, Class<T> responseType) throws ResponseException {
         try{
             URL url = (new URI(this.serverRoot + path)).toURL();
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
@@ -46,14 +49,14 @@ public class ServerFacade {
 
             return this.readBody(http, responseType);
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            throw new ResponseException(500, e.getMessage());
         }
     }
 
-    private void throwIfNotSuccessful(HttpURLConnection http) throws IOException {
+    private void throwIfNotSuccessful(HttpURLConnection http) throws ResponseException, IOException {
         var status = http.getResponseCode();
         if(status / 100 != 2) {
-            // Make a ResponseException
+            throw new ResponseException(status, "failure: " + status);
         }
     }
 

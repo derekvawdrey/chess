@@ -3,6 +3,8 @@ package commands.prelogin;
 import commands.BaseCommand;
 import model.ChessClient;
 
+import java.util.HashMap;
+
 public class HelpCommand extends BaseCommand {
     public HelpCommand(ChessClient chessClient) {
         super(
@@ -19,6 +21,9 @@ public class HelpCommand extends BaseCommand {
 
     @Override
     public void executeCommand(String... args) {
-        this.chessClient
+        HashMap<String, BaseCommand> commands = this.chessClient.getPreLoginCommands();
+        commands.forEach((commandName, command) -> {
+            System.out.println(command.getHelpMessage());
+        });
     }
 }

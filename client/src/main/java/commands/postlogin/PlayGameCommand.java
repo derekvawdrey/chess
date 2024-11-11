@@ -51,7 +51,7 @@ public class PlayGameCommand extends BaseObserveGameCommand {
             System.out.print(PrettyPrintChessBoard.prettyPrint(new ChessGame().getBoard(), ChessGame.TeamColor.WHITE));
             System.out.print(PrettyPrintChessBoard.prettyPrint(new ChessGame().getBoard(), ChessGame.TeamColor.BLACK));
         }catch (ResponseException e){
-            if(e.getStatusCode() == 409){
+            if(e.getStatusCode() == 403){
                 this.chessClient.printError("There is already a player for that color!");
             }else{
                 this.chessClient.printError("An unexpected error occurred.");

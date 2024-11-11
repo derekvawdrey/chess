@@ -1,7 +1,11 @@
 package commands.prelogin;
 
 import commands.BaseCommand;
+import exception.ResponseException;
+import model.AuthData;
 import model.ChessClient;
+import model.LoginRequest;
+import model.UserData;
 
 public class RegisterCommand extends BaseCommand  {
     public RegisterCommand(ChessClient chessClient) {
@@ -32,6 +36,25 @@ public class RegisterCommand extends BaseCommand  {
 
     @Override
     public void executeCommand(String... args) {
-
+        String username = args[0];
+        String password = args[1];
+        String email = args[2];
+        try {
+            AuthData authData = this.chessClient.getServerFacade().register(new UserData(username, password, email));
+            if(authData != null){
+                this.chessClient.setAuthData(authData);
+                this.chessClient.setState(ChessClient.ClientState.POST_LOGIN);
+            }else{
+                this.chessClient.printError("That user already exists!");
+            }
+        }
+        catch (ResponseException e) {
+            if(e.StatusCode() != 500){
+                this.chessClient.printError("There was an unexpected error...");
+            }else{
+                this.chessClient.printError(e.getMessage());
+                this.chessClient.printError("That user already exists!");
+            }
+        }
     }
 }

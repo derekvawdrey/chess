@@ -3,6 +3,8 @@ package commands.postlogin;
 import commands.BaseCommand;
 import model.ChessClient;
 
+import java.util.HashMap;
+
 public class HelpCommand extends BaseCommand {
 
 
@@ -21,6 +23,9 @@ public class HelpCommand extends BaseCommand {
 
     @Override
     public void executeCommand(String... args) {
-
+        HashMap<String, BaseCommand> commands = this.chessClient.getPostLoginCommands();
+        commands.forEach((commandName, command) -> {
+            System.out.println(command.getHelpMessage());
+        });
     }
 }

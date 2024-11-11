@@ -1,5 +1,6 @@
 package commands;
 
+import exception.ResponseException;
 import model.ChessClient;
 import ui.EscapeSequences;
 

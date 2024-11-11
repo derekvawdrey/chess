@@ -15,29 +15,34 @@ public class ServerFacade {
     public ServerFacade(int port) {
 
         this.port = port;
-        this.serverRoot = "localhost:" + this.port;
+        this.serverRoot = "http://localhost:" + this.port;
     }
 
     public AuthData register(UserData userData) throws ResponseException {
-        String path = "/register";
-        return this.makeRequest("POST", path, userData, AuthData.class);
+        String path = "/user";
+        return this.makeRequest("POST", path, userData, AuthData.class, null);
     }
 
     public AuthData login(LoginRequest loginRequest) throws ResponseException {
-        String path = "/login";
-        return this.makeRequest("POST", path, loginRequest, AuthData.class);
+        String path = "/session";
+        return this.makeRequest("POST", path, loginRequest, AuthData.class, null);
     }
 
-    public void logout(AuthData authData) {
-
+    public void logout(String authToken) throws ResponseException {
+        String path = "/session";
+        this.makeRequest("DELETE", path, null, null, authToken);
     }
 
-    private <T> T makeRequest(String method, String path, Object request, Class<T> responseType) throws ResponseException {
+    private <T> T makeRequest(String method, String path, Object request, Class<T> responseType, String authToken) throws ResponseException {
         try{
             URL url = (new URI(this.serverRoot + path)).toURL();
             HttpURLConnection http = (HttpURLConnection) url.openConnection();
             http.setRequestMethod(method);
             http.setDoOutput(true);
+
+            if(authToken != null) {
+                http.setRequestProperty("Authorization", "Bearer " + authToken);
+            }
 
             // Write the body
             this.writeBody(request, http);

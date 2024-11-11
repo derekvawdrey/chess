@@ -48,7 +48,7 @@ public class ChessClient {
         postLoginCommands.put("create", new CreateGameCommand(this));
         postLoginCommands.put("list", new ListGamesCommand(this));
         postLoginCommands.put("observe", new ObserveGameCommand(this));
-        postLoginCommands.put("quit", new QuitCommand(this));
+        postLoginCommands.put("logout", new QuitCommand(this));
 
 
         this.running = true;
@@ -86,9 +86,8 @@ public class ChessClient {
         };
 
         if(executedCommand != null){
-            if(!executedCommand.validateArgs(args)){
-                printError("Invalid arguments.");
-                System.out.println(executedCommand.getHelpMessage());
+            if(!executedCommand.validateArgs(args)) {
+                return;
             }
             executedCommand.executeCommand(args);
         }else{

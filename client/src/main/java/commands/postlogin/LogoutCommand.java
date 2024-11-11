@@ -23,8 +23,9 @@ public class LogoutCommand extends BaseCommand {
             this.chessClient.getServerFacade().logout(this.chessClient.getAuthData().authToken());
             this.chessClient.setState(ChessClient.ClientState.PRE_LOGIN);
             this.chessClient.setAuthData(null);
+            this.chessClient.printSuccess("Successfully logged out.");
         } catch (Exception e) {
-            this.chessClient.printError(e.getMessage());
+            this.chessClient.printError("An unexpected error has occured.");
         }
 
     }

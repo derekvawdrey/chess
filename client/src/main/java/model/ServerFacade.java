@@ -18,6 +18,8 @@ public class ServerFacade {
         this.serverRoot = "http://localhost:" + this.port;
     }
 
+    // PRE LOGIN ENDPOINTS
+
     public AuthData register(UserData userData) throws ResponseException {
         String path = "/user";
         return this.makeRequest("POST", path, userData, AuthData.class, null);
@@ -31,6 +33,12 @@ public class ServerFacade {
     public void logout(String authToken) throws ResponseException {
         String path = "/session";
         this.makeRequest("DELETE", path, null, null, authToken);
+    }
+
+    // POST LOGIN ENDPOINTS
+    public GameListResult listGames(String authToken) throws ResponseException{
+        String path = "/game";
+        return this.makeRequest("GET", path, null, GameListResult.class, authToken);
     }
 
     private <T> T makeRequest(String method, String path, Object request, Class<T> responseType, String authToken) throws ResponseException {

@@ -6,6 +6,7 @@ import dataaccess.DataAccessType;
 import dataaccess.manager.DataAccessManager;
 import exception.ResponseException;
 import model.AuthData;
+import model.LoginRequest;
 import model.UserData;
 import org.junit.jupiter.api.*;
 import server.Server;
@@ -39,73 +40,90 @@ public class ServerFacadeTests {
 
     @Test
     @DisplayName("Register - positive")
-    public void registerPositiveTest() {
-
+    public void registerPositiveTest() throws ResponseException {
+        AuthData userData = serverFacade.register(new UserData("a","a","a"));
+        Assertions.assertNotNull(userData);
     }
 
     @Test
     @DisplayName("Register - negative")
-    public void registerNegativeTest() {
+    public void registerNegativeTest() throws ResponseException {
+        UserData userData = new UserData("a", "a", "a");
 
+        try {
+            serverFacade.register(userData);
+            serverFacade.register(userData);
+            Assertions.fail("Womp WOMP should've failed, because you can't have two users with username 'a'");
+        } catch (ResponseException e) {
+            Assertions.assertEquals(403, e.getStatusCode(), "Status code 403 is expected for already existing registration");
+        }
     }
 
     @Test
     @DisplayName("Login - positive")
-    public void loginPositiveTest() {
-
+    public void loginPositiveTest() throws ResponseException {
+        UserData userData = new UserData("a", "a", "a");
+        serverFacade.register(userData);
+        serverFacade.login(new LoginRequest("a","a"));
     }
 
     @Test
     @DisplayName("Login - negative")
-    public void loginNegativeTest() {
+    public void loginNegativeTest() throws ResponseException {
+        try{
+            serverFacade.login(new LoginRequest("a","a"));
+            Assertions.fail("Homie thought you could login with wrong combos, but was right");
+        } catch (ResponseException e) {
+            Assertions.assertEquals(401, e.getStatusCode(), "Status code 401 expected, because this user doesn't exist");
+        }
 
     }
 
     @Test
     @DisplayName("Logout - positive")
-    public void logoutPositiveTest() {
+    public void logoutPositiveTest() throws ResponseException {
 
     }
 
     @Test
     @DisplayName("Logout - negative")
-    public void logoutNegativeTest() {
+    public void logoutNegativeTest() throws ResponseException {
 
     }
-    
+
     @Test
     @DisplayName("List Games - positive")
-    public void listGamesPositiveTest() {
+    public void listGamesPositiveTest() throws ResponseException {
 
     }
 
     @Test
     @DisplayName("List Games - negative")
-    public void listGamesNegativeTest() {
+    public void listGamesNegativeTest() throws ResponseException {
 
     }
 
     @Test
     @DisplayName("Join Game - positive")
-    public void joinGamePositiveTest() {
+    public void joinGamePositiveTest() throws ResponseException {
 
     }
 
     @Test
     @DisplayName("Join Game - negative")
-    public void joinGameNegativeTest() {
+    public void joinGameNegativeTest() throws ResponseException {
 
     }
 
     @Test
     @DisplayName("Create Game - positive")
-    public void createGamePositiveTest() {
+    public void createGamePositiveTest() throws ResponseException {
 
     }
 
     @Test
     @DisplayName("Create Game - negative")
-    public void createGameNegativeTest() {
+    public void createGameNegativeTest() throws ResponseException {
 
     }
 

@@ -1,4 +1,4 @@
-import model.ChessClient;
+import client_models.ChessClient;
 
 public class Main {
     public static void main(String[] args) {

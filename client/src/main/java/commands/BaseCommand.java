@@ -1,18 +1,14 @@
 package commands;
 
-import commands.postlogin.ListGamesCommand;
-import model.ChessClient;
-import model.GameDataResponse;
+import client_models.ChessClient;
 import ui.EscapeSequences;
-
-import java.util.List;
 
 public abstract class BaseCommand {
     protected final String description;
     protected final String usage;
-    protected final model.ChessClient chessClient;
+    protected final ChessClient chessClient;
 
-    protected BaseCommand(model.ChessClient chessClient, String description, String usage) {
+    protected BaseCommand(ChessClient chessClient, String description, String usage) {
         this.chessClient = chessClient;
         this.description = description;
         this.usage = usage;

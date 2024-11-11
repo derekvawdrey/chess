@@ -1,4 +1,4 @@
-package model;
+package client_models;
 
 import commands.BaseCommand;
 import commands.postlogin.*;
@@ -6,6 +6,7 @@ import commands.prelogin.HelpCommand;
 import commands.prelogin.LoginCommand;
 import commands.prelogin.QuitCommand;
 import commands.prelogin.RegisterCommand;
+import model.AuthData;
 import ui.EscapeSequences;
 
 import java.util.HashMap;

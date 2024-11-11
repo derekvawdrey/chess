@@ -1,7 +1,8 @@
-package model;
+package client_models;
 
 import com.google.gson.Gson;
 import exception.ResponseException;
+import model.*;
 
 import java.io.IOException;
 import java.io.InputStream;

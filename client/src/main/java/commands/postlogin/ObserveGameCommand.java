@@ -1,16 +1,13 @@
 package commands.postlogin;
 
-import commands.BaseCommand;
+import client_models.ChessClient;
 import commands.BaseObserveGameCommand;
-import model.GameDataResponse;
-
-import java.util.List;
 
 public class ObserveGameCommand extends BaseObserveGameCommand {
 
 
 
-    public ObserveGameCommand(model.ChessClient chessClient) {
+    public ObserveGameCommand(ChessClient chessClient) {
         super(
                 chessClient,
                 "Watch a game",

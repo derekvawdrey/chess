@@ -1,9 +1,10 @@
 package commands.prelogin;
 
+import client_models.ChessClient;
 import commands.BaseCommand;
 
 public class QuitCommand extends BaseCommand {
-    public QuitCommand(model.ChessClient chessClient) {
+    public QuitCommand(ChessClient chessClient) {
         super(
                 chessClient,
                 "Exit the program",

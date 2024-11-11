@@ -1,13 +1,9 @@
 package commands.postlogin;
 
-import commands.BaseCommand;
 import commands.BaseObserveGameCommand;
 import exception.ResponseException;
-import model.ChessClient;
-import model.GameDataResponse;
+import client_models.ChessClient;
 import model.JoinGameRequest;
-
-import java.util.List;
 
 public class PlayGameCommand extends BaseObserveGameCommand {
 

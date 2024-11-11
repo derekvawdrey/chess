@@ -23,8 +23,9 @@ public class ServerFacade {
         return this.makeRequest("POST", path, userData, AuthData.class);
     }
 
-    public AuthData login(LoginRequest loginRequest) {
-        return new AuthData("","");
+    public AuthData login(LoginRequest loginRequest) throws ResponseException {
+        String path = "/login";
+        return this.makeRequest("POST", path, loginRequest, AuthData.class);
     }
 
     public void logout(AuthData authData) {

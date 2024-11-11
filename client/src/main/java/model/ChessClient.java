@@ -9,15 +9,18 @@ import commands.prelogin.HelpCommand;
 import commands.prelogin.LoginCommand;
 import commands.prelogin.QuitCommand;
 import commands.prelogin.RegisterCommand;
+import ui.EscapeSequences;
 
 import java.util.Dictionary;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.Scanner;
 
 public class ChessClient {
     protected final HashMap<String, BaseCommand> preLoginCommands;
     protected final HashMap<String, BaseCommand> postLoginCommands;
     protected final HashMap<String, BaseCommand> inGameCommands;
+    private boolean running;
     private ClientState currentState;
     private AuthData authData;
 
@@ -45,6 +48,27 @@ public class ChessClient {
         postLoginCommands.put("observe", new ObserveGameCommand(this));
         postLoginCommands.put("quit", new QuitCommand(this));
 
+
+        this.running = true;
+    }
+
+    /**
+     * Start the ChessClient scanning process.
+     */
+    public void startScan(){
+        Scanner scanner = new Scanner(System.in);
+        var result = "";
+        while(running){
+            System.out.print(this.getCommandStartText());
+            String line = scanner.nextLine().trim();
+
+            String[] inputParts = line.split(" ");
+            String command = inputParts[0];
+            String[] args = new String[inputParts.length - 1];
+            System.arraycopy(inputParts, 1, args, 0, args.length);
+
+            this.executeCommand(command, args);
+        }
     }
 
     /**
@@ -61,11 +85,12 @@ public class ChessClient {
 
         if(executedCommand != null){
             if(!executedCommand.validateArgs(args)){
-                // TODO: Print the commands usage and give an error.
+                printError("Invalid arguments.");
+                System.out.println(executedCommand.getHelpMessage());
             }
             executedCommand.executeCommand(args);
         }else{
-            // TODO: Give an error and print out stuff.
+            printError("That command does not exist.");
         }
     }
 
@@ -84,6 +109,14 @@ public class ChessClient {
      */
     public void setAuthData(AuthData authData){
         this.authData = authData;
+    }
+
+    /**
+     * Used to stop the client from analysing
+     * @param running
+     */
+    public void setRunning(boolean running){
+        this.running = running;
     }
 
     /**
@@ -111,5 +144,48 @@ public class ChessClient {
         IN_GAME
     }
 
+    /**
+     * Gets the prefix for the commandline
+     */
+    private String getCommandStartText(){
+        String returnText = "";
+        switch (currentState) {
+            case PRE_LOGIN -> returnText = "(Not logged in) >>> ";
+            case POST_LOGIN -> returnText = "(" + this.authData.username() + ") >>> ";
+            case IN_GAME -> returnText = "(Game) >>>";
+        };
+        return returnText;
+    }
 
+    /**
+     * Prints an error out with colors
+     * @param error The string of the error
+     */
+    public void printError(String error){
+        System.out.println(EscapeSequences.SET_TEXT_COLOR_RED + error + EscapeSequences.RESET_TEXT_COLOR);
+    }
+
+    /**
+     * Returns all in game commands
+     * @return Hashmap of commands
+     */
+    public HashMap<String, BaseCommand> getInGameCommands() {
+        return inGameCommands;
+    }
+
+    /**
+     * Returns all pre-login commands
+     * @return Hashmap of commands
+     */
+    public HashMap<String, BaseCommand> getPreLoginCommands() {
+        return preLoginCommands;
+    }
+
+    /**
+     * Returns all post login commands
+     * @return Hashmap of commands
+     */
+    public HashMap<String, BaseCommand> getPostLoginCommands() {
+        return postLoginCommands;
+    }
 }

@@ -14,11 +14,11 @@ public class QuitCommand extends BaseCommand {
 
     @Override
     public boolean validateArgs(String... args) {
-        return false;
+        return true;
     }
 
     @Override
     public void executeCommand(String... args) {
-
+        this.chessClient.setRunning(false);
     }
 }

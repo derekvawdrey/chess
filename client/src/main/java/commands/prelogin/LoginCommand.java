@@ -14,7 +14,19 @@ public class LoginCommand extends BaseCommand {
 
     @Override
     public boolean validateArgs(String... args) {
-        return false;
+        if (args.length != 2) {
+            this.chessClient.printError("You must provide both a username and a password.");
+            return false;
+        }
+
+        String username = args[0];
+        String password = args[1];
+
+        if (username.isEmpty() || password.isEmpty()) {
+            this.chessClient.printError("Username and password cannot be empty.");
+            return false;
+        }
+        return true;
     }
 
     @Override

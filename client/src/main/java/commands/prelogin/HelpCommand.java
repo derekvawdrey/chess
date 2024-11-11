@@ -7,8 +7,8 @@ public class HelpCommand extends BaseCommand {
     public HelpCommand(ChessClient chessClient) {
         super(
                 chessClient,
-                "",
-                ""
+                "Shows all available commands",
+                "help"
         );
     }
 

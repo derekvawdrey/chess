@@ -7,8 +7,8 @@ public class RegisterCommand extends BaseCommand  {
     public RegisterCommand(ChessClient chessClient) {
         super(
                 chessClient,
-                "",
-                ""
+                "Register a new user",
+                "register <USERNAME> <PASSWORD> <EMAIL>"
         );
     }
 

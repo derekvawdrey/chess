@@ -7,8 +7,8 @@ public class QuitCommand extends BaseCommand {
     public QuitCommand(ChessClient chessClient) {
         super(
                 chessClient,
-                "",
-                ""
+                "Exit the program",
+                "quit"
         );
     }
 

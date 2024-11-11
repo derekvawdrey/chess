@@ -7,8 +7,8 @@ public class LoginCommand extends BaseCommand {
     public LoginCommand(ChessClient chessClient) {
         super(
                 chessClient,
-                "",
-                ""
+                "Login as an existing user",
+                "login <USERNAME> <PASSWORD>"
         );
     }
 

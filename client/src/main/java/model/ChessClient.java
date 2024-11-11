@@ -85,6 +85,23 @@ public class ChessClient {
     public void setAuthData(AuthData authData){
         this.authData = authData;
     }
+
+    /**
+     * Gets the users AuthData
+     * @return
+     */
+    public AuthData getAuthData(){
+        return this.authData;
+    }
+
+    /**
+     * Gets the current state of the client.
+     * @return
+     */
+    public ClientState getCurrentState(){
+        return this.currentState;
+    }
+
     /**
      * The clients current state
      */

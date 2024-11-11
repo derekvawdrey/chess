@@ -1,9 +1,11 @@
 package commands.postlogin;
 
+import chess.ChessGame;
 import commands.BaseObserveGameCommand;
 import exception.ResponseException;
 import core.ChessClient;
 import model.JoinGameRequest;
+import ui.PrettyPrintChessBoard;
 
 public class PlayGameCommand extends BaseObserveGameCommand {
 
@@ -45,6 +47,9 @@ public class PlayGameCommand extends BaseObserveGameCommand {
                     ),
                     this.chessClient.getAuthData().authToken()
             );
+
+            System.out.print(PrettyPrintChessBoard.prettyPrint(new ChessGame().getBoard(), ChessGame.TeamColor.WHITE));
+            System.out.print(PrettyPrintChessBoard.prettyPrint(new ChessGame().getBoard(), ChessGame.TeamColor.BLACK));
         }catch (ResponseException e){
             if(e.getStatusCode() == 409){
                 this.chessClient.printError("There is already a player for that color!");

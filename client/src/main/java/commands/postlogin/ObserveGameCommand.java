@@ -1,7 +1,9 @@
 package commands.postlogin;
 
+import chess.ChessGame;
 import core.ChessClient;
 import commands.BaseObserveGameCommand;
+import ui.PrettyPrintChessBoard;
 
 public class ObserveGameCommand extends BaseObserveGameCommand {
 
@@ -27,6 +29,7 @@ public class ObserveGameCommand extends BaseObserveGameCommand {
 
     @Override
     public void executeCommand(String... args) {
-
+        System.out.print(PrettyPrintChessBoard.prettyPrint(new ChessGame().getBoard(), ChessGame.TeamColor.WHITE));
+        System.out.print(PrettyPrintChessBoard.prettyPrint(new ChessGame().getBoard(), ChessGame.TeamColor.BLACK));
     }
 }

@@ -2,6 +2,8 @@ package commands.postlogin;
 
 import core.ChessClient;
 import commands.BaseCommand;
+import exception.ResponseException;
+import model.CreateGameRequest;
 
 public class CreateGameCommand extends BaseCommand {
     public CreateGameCommand(ChessClient chessClient) {
@@ -29,6 +31,14 @@ public class CreateGameCommand extends BaseCommand {
 
     @Override
     public void executeCommand(String... args) {
-
+        try {
+            this.chessClient.getServerFacade().createGame(
+                    new CreateGameRequest(args[0]),
+                    this.chessClient.getAuthData().authToken()
+            );
+            this.chessClient.printSuccess("The game was successfully created!");
+        } catch (ResponseException e) {
+            this.chessClient.printError("An unexpected error occurred!");
+        }
     }
 }

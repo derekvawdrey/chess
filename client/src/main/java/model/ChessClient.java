@@ -18,14 +18,19 @@ public class ChessClient {
     protected final HashMap<String, BaseCommand> preLoginCommands;
     protected final HashMap<String, BaseCommand> postLoginCommands;
     protected final HashMap<String, BaseCommand> inGameCommands;
+    private ClientState currentState;
 
     public ChessClient() {
         this.inGameCommands = new HashMap<>();
         this.preLoginCommands = new HashMap<>();
         this.postLoginCommands = new HashMap<>();
         this.initCommands();
+        this.currentState = ClientState.PRE_LOGIN;
     }
 
+    /**
+     * Initalize commands with command strings that will be executed
+     */
     private void initCommands(){
         preLoginCommands.put("help", new HelpCommand(this));
         preLoginCommands.put("login", new LoginCommand(this));
@@ -41,8 +46,41 @@ public class ChessClient {
 
     }
 
-    public void
+    /**
+     * Executes a command based on the provided commands string and state of the Client.
+     * @param commandString A string like 'help', 'create', 'login' that is in the dictionary.
+     * @param args
+     */
+    private void executeCommand(String commandString, String[] args) {
+        BaseCommand executedCommand = switch (currentState) {
+            case PRE_LOGIN -> preLoginCommands.get(commandString);
+            case POST_LOGIN -> postLoginCommands.get(commandString);
+            case IN_GAME -> inGameCommands.get(commandString);
+        };
 
+        if(executedCommand != null){
+            if(!executedCommand.validateArgs(args)){
+                // TODO: Print the commands usage and give an error.
+            }
+            executedCommand.executeCommand(args);
+        }else{
+            // TODO: Give an error and print out stuff.
+        }
+
+    }
+
+    /**
+     * Allows commands to directly modify the current state of the client.
+     * Useful for login, register, etc.
+     * @param state
+     */
+    public void setState(ClientState state){
+        this.currentState = state;
+    }
+
+    /**
+     * The clients current state
+     */
     public static enum ClientState{
         PRE_LOGIN,
         POST_LOGIN,

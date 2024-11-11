@@ -12,8 +12,8 @@ public abstract class BaseCommand {
         this.description = description;
         this.usage = usage;
     }
-    protected abstract boolean validateArgs(String[] args);
-    protected abstract void executeCommand(String[] args);
+    public abstract boolean validateArgs(String... args);
+    public abstract void executeCommand(String... args);
 
     public String getDescription() {
         return description;

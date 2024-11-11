@@ -15,12 +15,12 @@ public class HelpCommand extends BaseCommand {
     }
 
     @Override
-    protected boolean validateArgs(String[] args) {
+    public boolean validateArgs(String... args) {
         return false;
     }
 
     @Override
-    public void executeCommand(String[] args) {
+    public void executeCommand(String... args) {
 
     }
 }

@@ -19,6 +19,13 @@ public class ServerFacade {
         this.serverRoot = "http://localhost:" + this.port;
     }
 
+    // In general stuff
+
+    public void clearDatabase() throws ResponseException {
+        String path = "/db";
+        this.makeRequest("DELETE", path, null, null, null);
+    }
+
     // PRE LOGIN ENDPOINTS
 
     public AuthData register(UserData userData) throws ResponseException {

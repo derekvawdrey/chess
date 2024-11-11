@@ -14,7 +14,17 @@ public class CreateGameCommand extends BaseCommand {
 
     @Override
     public boolean validateArgs(String... args) {
-        return false;
+        if (args.length != 1) {
+            this.chessClient.printError("Invalid number of arguments!");
+            return false;
+        }
+
+        if(args[0].isBlank()){
+            this.chessClient.printError("Name cannot be blank!");
+            return false;
+        }
+
+        return true;
     }
 
     @Override

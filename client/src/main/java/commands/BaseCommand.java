@@ -1,6 +1,6 @@
 package commands;
 
-import client_models.ChessClient;
+import core.ChessClient;
 import ui.EscapeSequences;
 
 public abstract class BaseCommand {

@@ -1,7 +1,7 @@
 package commands.prelogin;
 
 import commands.BaseCommand;
-import client_models.ChessClient;
+import core.ChessClient;
 
 import java.util.HashMap;
 

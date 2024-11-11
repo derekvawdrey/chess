@@ -3,7 +3,7 @@ package commands.prelogin;
 import commands.BaseCommand;
 import exception.ResponseException;
 import model.AuthData;
-import client_models.ChessClient;
+import core.ChessClient;
 import model.UserData;
 
 public class RegisterCommand extends BaseCommand  {

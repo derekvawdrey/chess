@@ -1,7 +1,7 @@
 package commands.postlogin;
 
 import commands.BaseCommand;
-import client_models.ChessClient;
+import core.ChessClient;
 
 public class LogoutCommand extends BaseCommand {
     public LogoutCommand(ChessClient chessClient) {

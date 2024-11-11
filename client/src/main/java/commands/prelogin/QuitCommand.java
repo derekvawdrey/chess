@@ -1,6 +1,6 @@
 package commands.prelogin;
 
-import client_models.ChessClient;
+import core.ChessClient;
 import commands.BaseCommand;
 
 public class QuitCommand extends BaseCommand {

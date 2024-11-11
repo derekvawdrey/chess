@@ -1,4 +1,4 @@
-package client_models;
+package core;
 
 import commands.BaseCommand;
 import commands.postlogin.*;

@@ -1,6 +1,6 @@
 package commands.postlogin;
 
-import client_models.ChessClient;
+import core.ChessClient;
 import commands.BaseObserveGameCommand;
 
 public class ObserveGameCommand extends BaseObserveGameCommand {

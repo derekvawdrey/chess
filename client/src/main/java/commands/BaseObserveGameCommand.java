@@ -1,7 +1,7 @@
 package commands;
 
 import commands.postlogin.ListGamesCommand;
-import client_models.ChessClient;
+import core.ChessClient;
 import model.GameDataResponse;
 
 import java.util.List;

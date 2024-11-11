@@ -2,7 +2,7 @@ package commands.postlogin;
 
 import commands.BaseObserveGameCommand;
 import exception.ResponseException;
-import client_models.ChessClient;
+import core.ChessClient;
 import model.JoinGameRequest;
 
 public class PlayGameCommand extends BaseObserveGameCommand {

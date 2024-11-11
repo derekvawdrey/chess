@@ -1,7 +1,7 @@
 package commands.postlogin;
 
 import commands.BaseCommand;
-import client_models.ChessClient;
+import core.ChessClient;
 import model.GameDataResponse;
 import model.GameListResult;
 import ui.EscapeSequences;

@@ -1,4 +1,4 @@
-package client_models;
+package core;
 
 import com.google.gson.Gson;
 import exception.ResponseException;

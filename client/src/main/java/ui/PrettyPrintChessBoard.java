@@ -39,7 +39,9 @@ public class PrettyPrintChessBoard {
     }
 
     public static String getPieceSymbol(ChessPiece piece){
-        if(piece == null) return "   ";
+        if(piece == null){
+            return "   ";
+        }
         boolean isWhite = piece.getTeamColor() == ChessGame.TeamColor.WHITE;
 
         String stringPiece = switch (piece.getPieceType()) {

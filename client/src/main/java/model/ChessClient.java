@@ -19,6 +19,7 @@ public class ChessClient {
     protected final HashMap<String, BaseCommand> postLoginCommands;
     protected final HashMap<String, BaseCommand> inGameCommands;
     private ClientState currentState;
+    private AuthData authData;
 
     public ChessClient() {
         this.inGameCommands = new HashMap<>();
@@ -77,6 +78,13 @@ public class ChessClient {
         this.currentState = state;
     }
 
+    /**
+     * Used so commands can set authData as it sees fit.
+     * @param authData
+     */
+    public void setAuthData(AuthData authData){
+        this.authData = authData;
+    }
     /**
      * The clients current state
      */

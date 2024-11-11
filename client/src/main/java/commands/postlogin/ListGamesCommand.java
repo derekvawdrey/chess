@@ -1,4 +1,6 @@
 package commands.postlogin;
 
-public class ListGamesCommand {
+import commands.BaseCommand;
+
+public class ListGamesCommand extends BaseCommand {
 }

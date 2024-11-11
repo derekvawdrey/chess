@@ -1,4 +1,6 @@
 package commands.postlogin;
 
-public class LogoutCommand {
+import commands.BaseCommand;
+
+public class LogoutCommand extends BaseCommand {
 }

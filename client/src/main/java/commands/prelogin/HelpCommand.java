@@ -1,4 +1,6 @@
 package commands.prelogin;
 
-public class HelpCommand {
+import commands.BaseCommand;
+
+public class HelpCommand extends BaseCommand {
 }

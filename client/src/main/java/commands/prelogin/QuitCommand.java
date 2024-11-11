@@ -1,4 +1,6 @@
 package commands.prelogin;
 
-public class QuitCommand {
+import commands.BaseCommand;
+
+public class QuitCommand extends BaseCommand {
 }

@@ -1,4 +1,6 @@
 package commands.prelogin;
 
-public class RegisterCommand {
+import commands.BaseCommand;
+
+public class extends BaseCommand RegisterCommand {
 }

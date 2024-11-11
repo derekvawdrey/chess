@@ -22,6 +22,7 @@ public class ChessClient {
     protected final HashMap<String, BaseCommand> inGameCommands;
     private boolean running;
     private ClientState currentState;
+    private final ServerFacade serverFacade;
     private AuthData authData;
 
     public ChessClient() {
@@ -29,6 +30,7 @@ public class ChessClient {
         this.preLoginCommands = new HashMap<>();
         this.postLoginCommands = new HashMap<>();
         this.initCommands();
+        this.serverFacade = new ServerFacade(8080);
         this.currentState = ClientState.PRE_LOGIN;
     }
 
@@ -133,6 +135,10 @@ public class ChessClient {
      */
     public ClientState getCurrentState(){
         return this.currentState;
+    }
+
+    public ServerFacade getServerFacade() {
+        return serverFacade;
     }
 
     /**

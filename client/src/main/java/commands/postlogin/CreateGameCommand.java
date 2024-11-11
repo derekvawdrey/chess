@@ -4,7 +4,7 @@ import commands.BaseCommand;
 import model.ChessClient;
 
 public class CreateGameCommand extends BaseCommand {
-    protected CreateGameCommand(ChessClient chessClient) {
+    public CreateGameCommand(ChessClient chessClient) {
         super(
                 chessClient,
                 "",
@@ -18,7 +18,7 @@ public class CreateGameCommand extends BaseCommand {
     }
 
     @Override
-    protected void executeCommand(String[] args) {
+    public void executeCommand(String[] args) {
 
     }
 }

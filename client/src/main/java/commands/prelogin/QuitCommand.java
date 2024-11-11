@@ -4,7 +4,7 @@ import commands.BaseCommand;
 import model.ChessClient;
 
 public class QuitCommand extends BaseCommand {
-    protected QuitCommand(ChessClient chessClient) {
+    public QuitCommand(ChessClient chessClient) {
         super(
                 chessClient,
                 "",
@@ -18,7 +18,7 @@ public class QuitCommand extends BaseCommand {
     }
 
     @Override
-    protected void executeCommand(String[] args) {
+    public void executeCommand(String[] args) {
 
     }
 }

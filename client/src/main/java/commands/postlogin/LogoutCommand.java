@@ -4,7 +4,7 @@ import commands.BaseCommand;
 import model.ChessClient;
 
 public class LogoutCommand extends BaseCommand {
-    protected LogoutCommand(ChessClient chessClient) {
+    public LogoutCommand(ChessClient chessClient) {
         super(
                 chessClient,
                 "",
@@ -18,7 +18,7 @@ public class LogoutCommand extends BaseCommand {
     }
 
     @Override
-    protected void executeCommand(String[] args) {
+    public void executeCommand(String[] args) {
 
     }
 }

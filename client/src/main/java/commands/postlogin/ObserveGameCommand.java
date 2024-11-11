@@ -4,7 +4,7 @@ import commands.BaseCommand;
 import model.ChessClient;
 
 public class ObserveGameCommand extends BaseCommand {
-    protected ObserveGameCommand(ChessClient chessClient) {
+    public ObserveGameCommand(ChessClient chessClient) {
         super(
                 chessClient,
                 "",
@@ -18,7 +18,7 @@ public class ObserveGameCommand extends BaseCommand {
     }
 
     @Override
-    protected void executeCommand(String[] args) {
+    public void executeCommand(String[] args) {
 
     }
 }

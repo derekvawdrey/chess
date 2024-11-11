@@ -1,6 +1,7 @@
 package commands;
 
 import model.ChessClient;
+import ui.EscapeSequences;
 
 public abstract class BaseCommand {
     protected final String description;
@@ -13,4 +14,17 @@ public abstract class BaseCommand {
     }
     protected abstract boolean validateArgs(String[] args);
     protected abstract void executeCommand(String[] args);
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getUsage() {
+        return usage;
+    }
+
+    public String getHelpMessage(){
+        return EscapeSequences.SET_TEXT_COLOR_BLUE + this.usage +
+                EscapeSequences.SET_TEXT_COLOR_MAGENTA + " - " + this.description + EscapeSequences.RESET_TEXT_COLOR;
+    }
 }

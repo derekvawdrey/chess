@@ -1,10 +1,15 @@
 package commands.postlogin;
 
 import commands.BaseCommand;
+import model.ChessClient;
 
 public class CreateGameCommand extends BaseCommand {
-    protected CreateGameCommand() {
-        super("Creates a game", "");
+    protected CreateGameCommand(ChessClient chessClient) {
+        super(
+                chessClient,
+                "",
+                ""
+        );
     }
 
     @Override

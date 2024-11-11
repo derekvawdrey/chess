@@ -1,10 +1,15 @@
 package commands.prelogin;
 
 import commands.BaseCommand;
+import model.ChessClient;
 
 public class RegisterCommand extends BaseCommand  {
-    protected RegisterCommand(String description, String usage) {
-        super(description, usage);
+    protected RegisterCommand(ChessClient chessClient) {
+        super(
+                chessClient,
+                "",
+                ""
+        );
     }
 
     @Override

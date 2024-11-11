@@ -1,10 +1,15 @@
 package commands.prelogin;
 
 import commands.BaseCommand;
+import model.ChessClient;
 
 public class QuitCommand extends BaseCommand {
-    protected QuitCommand(String description, String usage) {
-        super(description, usage);
+    protected QuitCommand(ChessClient chessClient) {
+        super(
+                chessClient,
+                "",
+                ""
+        );
     }
 
     @Override

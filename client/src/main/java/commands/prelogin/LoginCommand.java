@@ -1,10 +1,15 @@
 package commands.prelogin;
 
 import commands.BaseCommand;
+import model.ChessClient;
 
 public class LoginCommand extends BaseCommand {
-    protected LoginCommand(String description, String usage) {
-        super(description, usage);
+    protected LoginCommand(ChessClient chessClient) {
+        super(
+                chessClient,
+                "",
+                ""
+        );
     }
 
     @Override
